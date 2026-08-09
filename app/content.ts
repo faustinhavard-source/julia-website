@@ -1,4 +1,4 @@
-export type StoryFilter = "work" | "projects" | "investing" | "random" | "weird";
+export type StoryFilter = "work" | "projects" | "investing" | "random" | "weird" | "reading";
 
 export type MediaItem = {
   label: string;
@@ -12,7 +12,12 @@ export type MediaItem = {
 export type StorySection = {
   title: string;
   dek?: string;
-  paragraphs?: string[];
+  paragraphs?: Array<
+    | string
+    | {
+        segments: Array<string | { label: string; href: string }>;
+      }
+  >;
   stats?: Array<{ value: string; label: string }>;
   bullets?: string[];
   items?: Array<{ title: string; note?: string }>;
@@ -36,23 +41,50 @@ export type Story = {
 
 export const filters: Array<{ label: string; value: "all" | StoryFilter }> = [
   { label: "all", value: "all" },
-  { label: "work", value: "work" },
   { label: "projects", value: "projects" },
   { label: "investing", value: "investing" },
   { label: "random", value: "random" },
   { label: "weird", value: "weird" },
+  { label: "reading", value: "reading" },
 ];
 
-export const stories: Story[] = [
+export type PortfolioCompany = {
+  name: string;
+  story?: string;
+  status?: "incoming";
+  size: "feature" | "quarter" | "third" | "half";
+  tone: "peach" | "cobalt" | "sunflower" | "pool" | "red" | "lilac" | "lime" | "blush" | "silver" | "green" | "midnight";
+};
+
+export const portfolioCompanies: PortfolioCompany[] = [
+  {
+    name: "Eigen",
+    story:
+      "Paul’s awesome. We met in November 2024 in Paris, well before Eigen was Eigen. He is the most obsessive product thinker I know. He is a visionary leader and magnetic personality who’s already taken Silicon Valley by a storm. I’m proud to be one of his first investors, but also good friend.",
+    size: "feature",
+    tone: "peach",
+  },
+  { name: "Uncovr", size: "quarter", tone: "cobalt" },
+  { name: "Tellia", size: "quarter", tone: "sunflower" },
+  { name: "Certo", size: "quarter", tone: "pool" },
+  { name: "Lemrock", size: "quarter", tone: "red" },
+  { name: "Allude", size: "third", tone: "lilac" },
+  { name: "Alassio", size: "third", tone: "lime" },
+  { name: "Synaps", size: "third", tone: "blush" },
+  { name: "Goldfish", status: "incoming", size: "quarter", tone: "silver" },
+  { name: "Avior", status: "incoming", size: "quarter", tone: "green" },
+  { name: "Marv Labs", status: "incoming", size: "half", tone: "midnight" },
+];
+
+const storyLibrary: Story[] = [
   {
     slug: "about-julia",
-    title: "About Julia",
-    year: "Kuala Lumpur → SF",
-    tag: "story",
+    title: "Bio + corporate life",
+    year: "Before & after the rabbit hole",
+    tag: "bio / work",
     index: "00",
-    summary: "Fashion, founders, family, and a collection of dopamine-inducing stints.",
-    intro:
-      "I grew up between South East Asia and France, then somehow found my way from fashion to technology. I am still happily stuck between the two.",
+    summary: "Kuala Lumpur to fashion, commercial scale, startups, and The Bridge, all in one story.",
+    intro: "Bio (who I am) + corporate life before the rabbit hole of start ups.",
     cover: {
       label: "FAMILY / PLACES / JULIA",
       note: "portrait or childhood collage",
@@ -67,31 +99,28 @@ export const stories: Story[] = [
     },
     sections: [
       {
-        title: "A childhood in several places",
+        title: "Who I am",
         paragraphs: [
-          "I grew up between Kuala Lumpur, Hong Kong and France, with an Irish mother and a French father. I have two brothers who are wildly talented and creative: Louis in games and Etienne in design.",
-          "My childhood dream was to be a news producer and work in media. I never tried.",
+          "I grew up in between South East Asia (Kuala Lumpur, Hong Kong) and France, with an Irish mother and a French Father. I have two brothers, who are incredibly talented and creative (Louis in games, Etienne in design). My childhood dream was to be a News Producer and work in the Media. I never tried.",
+          "I started my career in fashion (working on shoe Product Design at Louis Vuitton back when Virgil was around, then as a womenswear buyer for Le Bon Marché (being perhaps the only Uniqlo dressed buyer on the Jacquemus and Burberrys shows). It was fun to be around creatives all the time.",
+          "During the pandemic, stores were closed, I was on my couch. I launched a social commerce app to support hospitals raise funds. I realized then that selling beautiful garments was probably not was I should be doing with my life. I’ve always liked to build things, products, communities. I’ve since then built a bunch of really random things as side hustles or company attempts.",
+          "Life for me is a collection of dopamin inducing stints surrounded by great people, around the world. I’m forever stuck between wanting to slip back into creative industries and obsessed with the pace and culture of technology.",
+          "I’ve recently come to the realization that helping humans find their life’s work and follow their dreams is what brings me most joy.",
+          "I’m currently doing so through backing founders at The Bridge.",
         ],
       },
       {
-        title: "Then somehow fashion happened",
-        paragraphs: [
-          "I started my career working on shoe product design at Louis Vuitton, back when Virgil was around, then became a womenswear buyer for Le Bon Marché — perhaps the only Uniqlo-dressed buyer at the Jacquemus and Burberry shows.",
-          "It was fun to be around creative people all the time. It also taught me how to sell things, distribute them and negotiate very large contracts.",
-        ],
-      },
-      {
-        title: "Covid, couch, existential crisis",
-        paragraphs: [
-          "During the pandemic, stores closed and I was on my couch. I launched a social-commerce project to help hospitals raise funds. I realized that selling beautiful garments was probably not what I should be doing with my life.",
-          "I have always liked building things — products, communities, and occasionally very random side hustles or company attempts.",
-        ],
-      },
-      {
-        title: "Now",
-        paragraphs: [
-          "Life, for me, is a collection of dopamine-inducing stints surrounded by great people around the world. I am forever tempted to slip back into the creative industries, and equally obsessed with the pace and culture of technology.",
-          "Helping people find their life’s work and follow their dreams is what brings me the most joy. I’m currently doing that by backing founders at The Bridge.",
+        title: "Corporate life before the rabbit hole of start ups",
+        paragraphs: ["I know how to sell things, distribute them, and negotiate big contracts."],
+        items: [
+          {
+            title: "LVMH",
+            note: "2 years working as a buyer in LVMH - managing a $22M turnover sector working with a portfolio of 20 brands (Burberry, Moncler, Max Mara and more).",
+          },
+          {
+            title: "Otrium",
+            note: "2 years as a Head of Sales for France at a dutch fashion tech scale up called Otrium - bringing in $10M GMV year 1.",
+          },
         ],
       },
     ],
@@ -210,7 +239,7 @@ export const stories: Story[] = [
     index: "03",
     summary: "Flash auctions, improbable collectibles, and €500k+ raised for NGOs.",
     intro:
-      "A social-commerce Instagram account built with Eole Peyron during Covid to raise money for the Paris Hospital Foundation — powered entirely by community and hustle.",
+      "A social-commerce Instagram account built with Eole Peyron during Covid to raise money for the Paris Hospital Foundation, powered entirely by community and hustle.",
     cover: {
       label: "BID WITH LOVE",
       note: "campaign montage / auction still",
@@ -226,7 +255,7 @@ export const stories: Story[] = [
       {
         title: "The idea",
         paragraphs: [
-          "We flash-auctioned collectibles and lifestyle experiences to support the Paris Hospital Foundation during Covid. There was no paid acquisition — just an Instagram account, an urgent cause and a lot of messages sent to strangers.",
+          "We flash-auctioned collectibles and lifestyle experiences to support the Paris Hospital Foundation during Covid. There was no paid acquisition, just an Instagram account, an urgent cause and a lot of messages sent to strangers.",
           "In under two months, 25,000 people joined the community. Over a year, the project raised more than €500,000 for multiple NGOs and appeared in 30+ media outlets. We were nominated for the 2020 Women of Influence award for contributing to the national effort.",
         ],
         stats: [
@@ -239,7 +268,7 @@ export const stories: Story[] = [
       {
         title: "Some ridiculous things we auctioned",
         bullets: [
-          "Zinedine Zidane’s signed football boots — sold for $4k",
+          "Zinedine Zidane’s signed football boots, sold for $4k",
           "Lucas Pouille’s tennis racket, Tony Parker’s NBA hat and Vincent Clerc’s rugby boots",
           "Caps from Loïck Peyron’s three America’s Cups",
           "VIP tickets from 47TER and a collector LP from Bob Sinclar",
@@ -250,7 +279,7 @@ export const stories: Story[] = [
       {
         title: "What stayed with me",
         paragraphs: [
-          "The project made building feel immediate and human. It was the moment I understood that products and communities could move people — and that I wanted to spend much more of my life making them.",
+          "The project made building feel immediate and human. It was the moment I understood that products and communities could move people, and that I wanted to spend much more of my life making them.",
         ],
       },
     ],
@@ -305,7 +334,7 @@ export const stories: Story[] = [
       {
         title: "Stepping out",
         paragraphs: [
-          "I stepped out in July 2023. Henri became CEO and has grown Newtone into a solid business since then — working with some of the best retailers and surviving the SaaSpocalypse with a genuinely cool product.",
+          "I stepped out in July 2023. Henri became CEO and has grown Newtone into a solid business since then, working with some of the best retailers and surviving the SaaSpocalypse with a genuinely cool product.",
         ],
       },
     ],
@@ -387,27 +416,42 @@ export const stories: Story[] = [
       {
         title: "Day minus one",
         paragraphs: [
-          "The Bridge is an eight-week residency for 50 individual technologists looking for a co-founder and hoping to start a massive company. They live under one roof, receive advice from some of the world’s best entrepreneurs and investors, and receive funding.",
-          "We are building a no-distraction community of founders and friends from all over the world.",
-        ],
-        stats: [
-          { value: "50", label: "technologists per cohort" },
-          { value: "8 wks", label: "living and building" },
-          { value: "4×", label: "cohorts per year" },
-          { value: "200+", label: "people backed at day −1" },
+          {
+            segments: [
+              "In October 2025, we publicly announced the launch of our ",
+              {
+                label: "Bridge founder residency is San Francisco",
+                href: "https://www.youtube.com/watch?v=Q19UT4u91wY&list=PLaDjE1VTVKMQg9mQiMY_qGoEdXcxiGyZL&index=4",
+              },
+              ".",
+            ],
+          },
+          "The Bridge is an 8 week residency program uniting 50 individual technologists looking for a co-founder, and looking to start a massive company. They all live under one roof, receive advisory by some of the worlds’ best entrepreneurs and investors, and receive funding. We are building a no-distraction community of founders and friends from all over the world.",
         ],
       },
       {
         title: "Built from both sides of the table",
         paragraphs: [
-          "I’m building The Bridge with Anastasia Wolter and an incredible team at Entrepreneurs First. Having done EF and YC as founders — and raised venture capital in both Europe and the US — we understand the best and worst of incubators, accelerators and hacker houses.",
-          "The residency is a living product: our current iteration of what the earliest-stage founder experience should feel like.",
+          "I’m building this with Anastasia Wolter and an incredible team at EF. Having done EF and YC as founders, we had a really good understanding of what early stage incubators, accelerators, hacker houses (however you want to call it) could bring to founders. Both good and bad. We also had a good understanding of what the 0>1 venture path looked like, having personally raised venture capital on both our companies, in Europe and in the US. The Bridge residency is a work in progress product iteration of what we believe the best accelerator like experience should look like for founders. It’s funded and backed by Entrepreneurs First.",
         ],
       },
       {
         title: "The original bridge",
         paragraphs: [
-          "We didn’t invent it. Maxence, Estelle, Donia and Pauline ran the first version at Bückeburg Castle in Germany. It was so good that we moved it to San Francisco and began taking it to the next level.",
+          {
+            segments: [
+              "We didn’t actually come up with the idea for the Bridge. Maxence, Estelle, Donia and Pauline ran the very first iteration of the Bridge product, in Buckberg Castle in Germany, it was awesome. ",
+              { label: "Check it out", href: "https://www.youtube.com/watch?v=JkfiJY2HYX4" },
+              " here.",
+            ],
+          },
+          {
+            segments: [
+              "It was such a good product that we moved it to SF and are taking it to the next level. ",
+              { label: "Finding the residency", href: "https://www.youtube.com/watch?v=I9zSQPz105c" },
+              " was fun! We are running 4 cohorts a year: Winter, Spring, Summer and Fall, backing 200+ individuals at day -1, before they have a co-founder or an idea.",
+            ],
+          },
         ],
       },
     ],
@@ -427,7 +471,7 @@ export const stories: Story[] = [
     index: "07",
     summary: "Art shows, game jams, robots, hackathons, and a technical community.",
     intro:
-      "Not companies, not exactly hobbies — a collection of rooms I was lucky enough to help make more interesting.",
+      "Not companies and not exactly hobbies, just a collection of rooms I was lucky enough to help make more interesting.",
     cover: {
       label: "SIDE QUESTS",
       note: "event contact sheet",
@@ -448,9 +492,9 @@ export const stories: Story[] = [
       {
         title: "A very hackathon-heavy year",
         items: [
-          { title: "Meta Consumer Hackathon", note: "September 2025 — a camera roll full of prototypes and people." },
-          { title: "Mistral AI Game Jam", note: "April 2025 — games, models and barely enough sleep." },
-          { title: "Europe’s first and biggest Robotics Hackathon", note: "April 2025 — hardware everywhere." },
+          { title: "Meta Consumer Hackathon", note: "September 2025: a camera roll full of prototypes and people." },
+          { title: "Mistral AI Game Jam", note: "April 2025: games, models and barely enough sleep." },
+          { title: "Europe’s first and biggest Robotics Hackathon", note: "April 2025: hardware everywhere." },
         ],
       },
       {
@@ -483,7 +527,7 @@ export const stories: Story[] = [
     index: "08",
     summary: "Rare cacti, plane crashes, three tonnes of spirits, and one racehorse syndicate.",
     intro:
-      "The page most likely to explain me — or make me substantially harder to explain.",
+      "The page most likely to explain me, or make me substantially harder to explain.",
     cover: {
       label: "CACTI / PLANES / CIDER / HORSES",
       note: "a deliberately chaotic collage",
@@ -501,8 +545,8 @@ export const stories: Story[] = [
         items: [
           { title: "🌵 Rare cacti", note: "I launched an online marketplace for rare-cactus owners and am the proud owner of cacthusiasts.com." },
           { title: "✈ Plane crashes", note: "I’m obsessed. I have read everything I can find about the most spectacular cases. MH370 is still the craziest one out there." },
-          { title: "🍎 Cider and Calvados", note: "My family runs a farm in Normandy. I have written several business plans for a cider brand bound for America. We have three tonnes of spirits to sell — hit me up if you want to start that business for me." },
-          { title: "♞ Daytona’s Stable", note: "I invested in horse racing with 20 of my best friends from university. I know nothing about horse racing. It is perhaps 10× more thrilling — and 10× less profitable — than venture investing." },
+          { title: "🍎 Cider and Calvados", note: "My family runs a farm in Normandy. I have written several business plans for a cider brand bound for America. We have three tonnes of spirits to sell. Hit me up if you want to start that business for me." },
+          { title: "♞ Daytona’s Stable", note: "I invested in horse racing with 20 of my best friends from university. I know nothing about horse racing. It is perhaps 10× more thrilling and 10× less profitable than venture investing." },
         ],
       },
     ],
@@ -521,9 +565,9 @@ export const stories: Story[] = [
     tag: "investing",
     filter: "investing",
     index: "09",
-    summary: "Early bets on obsessive people — with the personal story where there is one.",
+    summary: "Early bets on obsessive people, with the personal story where there is one.",
     intro:
-      "A portfolio should be more than a logo wall. This is a list of companies, and eventually the very human reason behind every yes.",
+      "A mosaic of early bets. Hover, focus or tap a company to read the little story behind it.",
     cover: {
       label: "EARLY BELIEFS",
       note: "founder portraits / company marks",
@@ -539,7 +583,7 @@ export const stories: Story[] = [
       {
         title: "Eigen",
         paragraphs: [
-          "Paul is awesome. We met in Paris in November 2024, well before Eigen was Eigen. He is the most obsessive product thinker I know — a visionary leader and magnetic personality who has already taken Silicon Valley by storm. I’m proud to be one of his first investors, and also a good friend.",
+          "Paul’s awesome. We met in November 2024 in Paris, well before Eigen was Eigen. He is the most obsessive product thinker I know. He is a visionary leader and magnetic personality who’s already taken Silicon Valley by a storm. I’m proud to be one of his first investors, but also a good friend.",
         ],
       },
       {
@@ -553,15 +597,11 @@ export const stories: Story[] = [
           { title: "Allude" },
           { title: "Alassio" },
           { title: "Synaps" },
-          { title: "Goldfish", note: "story incoming" },
-          { title: "Avior", note: "story incoming" },
-          { title: "Marv Labs", note: "story incoming" },
+          { title: "Goldfish", note: "incoming" },
+          { title: "Avior", note: "incoming" },
+          { title: "Marv Labs", note: "incoming" },
         ],
       },
-    ],
-    gallery: [
-      { label: "FOUNDER NOTES", note: "personal stories, not logos", tone: "blush", aspect: "wide" },
-      { label: "PORTFOLIO MARKS", note: "company logos when supplied", tone: "silver", aspect: "square" },
     ],
   },
   {
@@ -569,7 +609,7 @@ export const stories: Story[] = [
     title: "Reading / listening",
     year: "An open shelf",
     tag: "list",
-    filter: "random",
+    filter: "reading",
     index: "10",
     summary: "The books, essays, podcasts and rabbit holes currently shaping the thinking.",
     intro:
@@ -612,7 +652,7 @@ export const stories: Story[] = [
     year: "Open inbox",
     tag: "contact",
     index: "11",
-    summary: "Hiring, fundraising, GTM, sales, introductions — or one of the stranger topics.",
+    summary: "Hiring, fundraising, GTM, sales, introductions, or one of the stranger topics.",
     intro:
       "I invest through The Bridge and Entrepreneurs First, and I also help founders ad hoc when the right introduction or honest conversation can unlock something.",
     cover: {
@@ -647,7 +687,31 @@ export const stories: Story[] = [
   },
 ];
 
+const pageOrder = [
+  "about-julia",
+  "investment-portfolio",
+  "lvmh-concept-store",
+  "collabforlove",
+  "newtone-ai",
+  "the-drop",
+  "the-bridge",
+  "weird-things",
+  "reading-listening",
+  "random-things",
+];
+
+export const bioStory = storyLibrary.find((entry) => entry.slug === "about-julia")!;
+
+export const stories: Story[] = pageOrder.map((slug, index) => {
+  const story = storyLibrary.find((entry) => entry.slug === slug);
+  if (!story) throw new Error(`Missing story: ${slug}`);
+
+  return {
+    ...story,
+    index: String(index).padStart(2, "0"),
+  };
+});
+
 export function getStory(slug: string) {
   return stories.find((story) => story.slug === slug);
 }
-

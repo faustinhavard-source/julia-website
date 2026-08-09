@@ -2,10 +2,34 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { filters, stories, type StoryFilter } from "./content";
+import { filters, stories, type Story, type StoryFilter } from "./content";
 import { FooterNote, MediaFrame, SiteHeader } from "./components";
 
 type ActiveFilter = "all" | StoryFilter;
+
+function StoryCard({ story }: { story: Story }) {
+  return (
+    <Link
+      className="story-card clutter-card"
+      data-slug={story.slug}
+      href={`/story/${story.slug}`}
+    >
+      <MediaFrame media={story.cover} compact />
+      <div className="card-meta">
+        <div className="card-title-row">
+          <h3>{story.title}</h3>
+          <span>{story.index}</span>
+        </div>
+        <p className="card-year">{story.year}</p>
+        <p className="card-summary">{story.summary}</p>
+        <div className="card-bottom">
+          <span className="tag">{story.tag}</span>
+          <span className="read-more">open page ↗</span>
+        </div>
+      </div>
+    </Link>
+  );
+}
 
 export default function HomeIndex() {
   const [activeFilter, setActiveFilter] = useState<ActiveFilter>("all");
@@ -19,26 +43,15 @@ export default function HomeIndex() {
       <SiteHeader />
 
       <main className="home-main">
-        <section className="index-intro" aria-labelledby="archive-title">
-          <div>
-            <p className="kicker">INDEX / WORK / SIDE QUESTS / ODDITIES</p>
-            <h1 id="archive-title">
-              An internet archive of everything Julia has somehow ended up doing.
-            </h1>
-          </div>
-          <p className="intro-note">
-            Part work history, part founder scrapbook, part evidence that curiosity is not a linear
-            career strategy.
-          </p>
-        </section>
-
-        <section className="work-index" aria-label="Julia's archive index">
-          <div className="index-toolbar">
+        <section className="clutter-index" aria-labelledby="clutter-heading">
+          <div className="clutter-toolbar">
             <div>
-              <h2>Browse the archive</h2>
-              <p>{String(visibleStories.length).padStart(2, "0")} entries showing</p>
+              <p className="kicker">WORK / PROJECTS / ODDITIES</p>
+              <h2 id="clutter-heading">Everything else</h2>
+              <p>{String(visibleStories.length).padStart(2, "0")} pages showing</p>
             </div>
-            <div className="filter-row" role="group" aria-label="Filter archive">
+
+            <div className="filter-row" role="group" aria-label="Filter Julia's archive">
               {filters.map((filter) => (
                 <button
                   className={activeFilter === filter.value ? "is-active" : ""}
@@ -53,24 +66,8 @@ export default function HomeIndex() {
             </div>
           </div>
 
-          <div className="story-grid" aria-live="polite">
-            {visibleStories.map((story) => (
-              <Link className="story-card" href={`/story/${story.slug}`} key={story.slug}>
-                <MediaFrame media={story.cover} compact />
-                <div className="card-meta">
-                  <div className="card-title-row">
-                    <h3>{story.title}</h3>
-                    <span>{story.index}</span>
-                  </div>
-                  <p className="card-year">{story.year}</p>
-                  <p className="card-summary">{story.summary}</p>
-                  <div className="card-bottom">
-                    <span className="tag">{story.tag}</span>
-                    <span className="read-more">open story ↗</span>
-                  </div>
-                </div>
-              </Link>
-            ))}
+          <div className="clutter-grid" aria-live="polite">
+            {visibleStories.map((story) => <StoryCard story={story} key={story.slug} />)}
           </div>
         </section>
       </main>
@@ -79,4 +76,3 @@ export default function HomeIndex() {
     </div>
   );
 }
-

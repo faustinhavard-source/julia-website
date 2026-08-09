@@ -12,21 +12,21 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase,
     title: {
-      default: "Julia — work, side quests & oddities",
+      default: "Julia: work, side quests & oddities",
       template: "%s",
     },
     description: "An internet archive of everything Julia has somehow ended up doing.",
     applicationName: "Julia’s internet archive",
     openGraph: {
       type: "website",
-      title: "Julia — work, side quests & oddities",
-      description: "Fashion, founders, side quests and useful oddities — all in one internet archive.",
+      title: "Julia: work, side quests & oddities",
+      description: "Fashion, founders, side quests and useful oddities, all in one internet archive.",
       images: [{ url: socialImage, width: 1792, height: 934, alt: "Julia’s internet archive" }],
     },
     twitter: {
       card: "summary_large_image",
-      title: "Julia — work, side quests & oddities",
-      description: "Fashion, founders, side quests and useful oddities — all in one internet archive.",
+      title: "Julia: work, side quests & oddities",
+      description: "Fashion, founders, side quests and useful oddities, all in one internet archive.",
       images: [socialImage],
     },
   };

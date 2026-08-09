@@ -5,28 +5,30 @@ export function SiteHeader() {
   return (
     <header className="site-header">
       <div className="identity-block">
-        <Link className="wordmark" href="/" aria-label="Julia's archive home">
-          ✦ Julia ✦
-        </Link>
-        <p>
-          <strong>Currently:</strong> building <mark>The Bridge</mark> @ Entrepreneurs First
-        </p>
-        <p>
-          <strong>Previously:</strong> founder, fashion, sales, and too many side quests
-        </p>
-        <p className="talk-line">
-          <strong>Talk to me about:</strong> founders, retail, strange businesses, SF vs Europe,
-          <mark> plane crashes</mark>, cider, and finding your life’s work.
-        </p>
-      </div>
-
-      <div className="header-side">
-        <p className="status-dot"><span aria-hidden="true">●</span> open to useful conversations</p>
+        <div className="identity-copy">
+          <Link className="wordmark" href="/" aria-label="Julia's archive home">
+            ✦ Julia ✦
+          </Link>
+          <p>
+            <strong>Currently:</strong> building <mark>The Bridge</mark> @ Entrepreneurs First
+          </p>
+          <p>
+            <strong>Previously:</strong> founder, fashion, sales, and too many side quests
+          </p>
+          <p className="talk-line">
+            <strong>Talk to me about:</strong> founders, retail, strange businesses, SF vs Europe,
+            <mark> plane crashes</mark>, cider, and finding your life’s work.
+          </p>
+          <p className="portfolio-line">
+            <strong><Link href="/story/investment-portfolio">Investment portfolio:</Link></strong>{" "}
+            Eigen, Uncovr, Tellia, Certo, Lemrock, Allude, Alassio, Synaps, Goldfish, Avior, Marv Labs
+          </p>
+        </div>
         <nav className="social-list" aria-label="Social links awaiting Julia's URLs">
           <span>LinkedIn <i>[add link]</i></span>
           <span>Instagram <i>[add link]</i></span>
           <span>X <i>[add link]</i></span>
-          <Link href="/story/lets-chat">Let’s chat ↗</Link>
+          <span>Email <i>[add link]</i></span>
         </nav>
       </div>
     </header>
@@ -64,8 +66,7 @@ export function FooterNote() {
     <footer className="site-footer">
       <span>Julia’s internet archive</span>
       <span>WIP, on purpose</span>
-      <Link href="/story/lets-chat">say hello ↗</Link>
+      <span>10 pages / one life so far</span>
     </footer>
   );
 }
-
