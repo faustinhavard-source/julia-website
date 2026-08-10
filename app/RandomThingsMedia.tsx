@@ -5,7 +5,7 @@ type RandomMediaGroup = "alys" | "meta" | "mistral";
 const media: Record<RandomMediaGroup, Array<{ src: string; alt: string; caption: string }>> = {
   alys: [
     {
-      src: "/media/random-things/alys-paola-original.png",
+      src: "/media/random-things/alys-paola-original.webp",
       alt: "Poster for Alys Paola’s first Paris exhibition in July 2024",
       caption: "Alys Paola, Paris, July 2024",
     },
@@ -39,22 +39,22 @@ const media: Record<RandomMediaGroup, Array<{ src: string; alt: string; caption:
   ],
   mistral: [
     {
-      src: "/media/random-things/mistral-demo-original.png",
+      src: "/media/random-things/mistral-demo-original.webp",
       alt: "A team presenting its project at the Mistral AI Game Jam",
       caption: "Demo time",
     },
     {
-      src: "/media/random-things/mistral-julia-anastasia-original.png",
+      src: "/media/random-things/mistral-julia-anastasia-original.webp",
       alt: "Julia and Anastasia working together during the Mistral AI Game Jam",
       caption: "Julia + Anastasia",
     },
     {
-      src: "/media/random-things/mistral-audience-original.png",
+      src: "/media/random-things/mistral-audience-original.webp",
       alt: "A crowded room during the Mistral AI Game Jam",
       caption: "Mistral AI Game Jam",
     },
     {
-      src: "/media/random-things/mistral-lets-hack-original.png",
+      src: "/media/random-things/mistral-lets-hack-original.webp",
       alt: "The Let’s hack sign at the Mistral AI Game Jam",
       caption: "Let’s hack!",
     },

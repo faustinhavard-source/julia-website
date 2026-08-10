@@ -16,7 +16,7 @@ export function CollabforloveStoryCollage() {
       <figure className="collab-collage-piece collab-collage-standing">
         <LightboxImage
           alt="Julia and Eole standing together in Paris"
-          src="/media/collabforlove/julia-eole-standing.png"
+          src="/media/collabforlove/julia-eole-standing.webp"
         />
         <figcaption>Julia + Eole, the people behind the feed</figcaption>
       </figure>
@@ -24,7 +24,7 @@ export function CollabforloveStoryCollage() {
       <figure className="collab-collage-piece collab-collage-seated">
         <LightboxImage
           alt="Julia and Eole sitting together in a Paris garden"
-          src="/media/collabforlove/julia-eole-seated.png"
+          src="/media/collabforlove/julia-eole-seated.webp"
         />
         <figcaption>Built together, entirely through community</figcaption>
       </figure>

@@ -80,7 +80,7 @@ export default async function StoryPage({ params }: StoryPageProps) {
 
         {story.slug === "the-bridge" && (
           <section className="bridge-team-photo" aria-label="The Bridge team">
-            <LightboxImage alt="The full Bridge team together by the San Francisco Bay" src="/media/the-bridge/team.png" />
+            <LightboxImage alt="The full Bridge team together by the San Francisco Bay" src="/media/the-bridge/team.webp" />
           </section>
         )}
 

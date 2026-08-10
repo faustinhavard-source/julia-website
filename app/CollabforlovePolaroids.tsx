@@ -16,7 +16,7 @@ const polaroids: Polaroid[] = [
   {
     title: "Zinedine Zidane’s boots",
     description: "Signed football boots, sold for $4k.",
-    src: "/media/collabforlove/zidane-boots.png",
+    src: "/media/collabforlove/zidane-boots.webp",
     alt: "Zinedine Zidane's signed neon football boots on grass",
     note: "football / auction lot",
   },
@@ -32,14 +32,14 @@ const polaroids: Polaroid[] = [
   {
     title: "Lucas Pouille’s racket",
     description: "The tennis racket that joined the auction.",
-    src: "/media/collabforlove/lucas-pouille-racket.png",
+    src: "/media/collabforlove/lucas-pouille-racket.webp",
     alt: "Lucas Pouille holding a tennis racket",
     note: "tennis / auction lot",
   },
   {
     title: "Vincent Clerc’s boots",
     description: "Signed rugby boots from Vincent Clerc.",
-    src: "/media/collabforlove/vincent-clerc-boots.png",
+    src: "/media/collabforlove/vincent-clerc-boots.webp",
     alt: "Vincent Clerc holding signed red rugby boots",
     note: "rugby / auction lot",
   },
@@ -65,7 +65,7 @@ const polaroids: Polaroid[] = [
     title: "JR, Giants, Miguel",
     description:
       "« Giants, Miguel, Casa Amarela, Morro da Providência, Rio de Janeiro, Brazil », JR, 2018.",
-    src: "/media/collabforlove/jr-giants-miguel.png",
+    src: "/media/collabforlove/jr-giants-miguel.webp",
     alt: "JR's Giants, Miguel artwork in Morro da Providência, Rio de Janeiro",
     note: "art / JR / 2018",
   },
