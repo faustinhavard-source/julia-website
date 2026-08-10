@@ -1,4 +1,3 @@
-import Link from "next/link";
 import type { MediaItem } from "./content";
 
 export function SiteHeader() {
@@ -6,9 +5,9 @@ export function SiteHeader() {
     <header className="site-header">
       <div className="identity-block">
         <div className="identity-copy">
-          <Link className="wordmark" href="/" aria-label="Julia's archive home">
+          <a className="wordmark" href="/" aria-label="Julia's archive home">
             ✦ Julia ✦
-          </Link>
+          </a>
           <p>
             <strong>Currently:</strong> building <mark>The Bridge</mark> @ Entrepreneurs First
           </p>
@@ -20,7 +19,7 @@ export function SiteHeader() {
             <mark> plane crashes</mark>, cider, and finding your life’s work.
           </p>
           <p className="portfolio-line">
-            <strong><Link href="/story/investment-portfolio">Investment portfolio:</Link></strong>{" "}
+            <strong><a href="/story/investment-portfolio">Investment portfolio:</a></strong>{" "}
             Eigen, Uncovr, Tellia, Certo, Lemrock, Allude, Alassio, Synaps, Goldfish, Avior, Marv Labs
           </p>
         </div>

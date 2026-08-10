@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
 import { filters, stories, type Story, type StoryFilter } from "./content";
 import { FooterNote, MediaFrame, SiteHeader } from "./components";
 
@@ -9,7 +8,7 @@ type ActiveFilter = "all" | StoryFilter;
 
 function StoryCard({ story }: { story: Story }) {
   return (
-    <Link
+    <a
       className="story-card clutter-card"
       data-slug={story.slug}
       href={`/story/${story.slug}`}
@@ -27,7 +26,7 @@ function StoryCard({ story }: { story: Story }) {
           <span className="read-more">open page ↗</span>
         </div>
       </div>
-    </Link>
+    </a>
   );
 }
 

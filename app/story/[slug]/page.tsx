@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CollabforlovePolaroids } from "../../CollabforlovePolaroids";
 import { CollabforloveStoryCollage } from "../../CollabforloveStoryCollage";
@@ -46,7 +45,7 @@ export default async function StoryPage({ params }: StoryPageProps) {
     <main className={`story-page story-${story.slug} ${story.slug === "investment-portfolio" ? "portfolio-story-page" : ""}`}>
         <div className="story-heading">
           <p className="breadcrumbs">
-            <Link href="/">archive</Link> / {story.filter ?? "story"} / {story.slug}
+            <a href="/">archive</a> / {story.filter ?? "story"} / {story.slug}
           </p>
           <div className="story-title-wrap">
             <div>
@@ -212,9 +211,9 @@ export default async function StoryPage({ params }: StoryPageProps) {
 
         <nav className="story-next" aria-label="Next archive story">
           <span>NEXT ENTRY</span>
-          <Link href={`/story/${nextStory.slug}`}>
+          <a href={`/story/${nextStory.slug}`}>
             {nextStory.title} <span aria-hidden="true">→</span>
-          </Link>
+          </a>
         </nav>
       </main>
 
