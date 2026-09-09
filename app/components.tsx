@@ -64,8 +64,7 @@ export function MediaFrame({ media, compact = false, loading = "eager" }: {
 export function FooterNote() {
   return (
     <footer className="site-footer">
-      <div><span>Julia Denoly</span><p>A few things, always becoming.</p></div>
-      <div className="footer-note"><span>WIP, on purpose.</span><a href="/fonts/credits.txt">Type credits</a></div>
+      <span>Julia Denoly</span>
     </footer>
   );
 }

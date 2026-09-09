@@ -52,8 +52,8 @@ export default async function StoryPage({ params }: StoryPageProps) {
             <span>{sectionLabel}</span>
           </nav>
           <h1>{story.title}</h1>
-          <p className="story-year">{story.year}</p>
-          <p className="story-category"><span className="tag">{story.tag}</span></p>
+          {story.year && <p className="story-year">{story.year}</p>}
+          <p className="story-category"><span className="tag">{story.tag}{story.status === "incoming" && " · incoming"}</span></p>
           {story.slug === "newtone-ai" && (
             <a className="story-website-link" href="https://www.newtone.ai/" target="_blank" rel="noreferrer">
               newtone.ai ↗

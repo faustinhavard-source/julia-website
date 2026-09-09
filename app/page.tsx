@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  const entries = archiveStories.map(({ slug, title, year, filter, cover }) => ({ slug, title, year, filter, cover }));
+  const entries = archiveStories.map(({ slug, title, year, status, filter, cover }) => ({ slug, title, year, status, filter, cover }));
   return (
     <div className="site-shell">
       <SiteHeader />

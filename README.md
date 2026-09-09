@@ -1,6 +1,6 @@
 # Julia’s website
 
-Julia’s personal archive: work, investments and side quests. The `dev` branch contains the September 2026 redesign, with a pastel title-only mosaic, Karrik headings and Inter body text. Both fonts are served locally, with their licences and credits in `public/fonts/`. Existing photos remain available inside story pages.
+Julia’s personal archive: work, investments and side quests. The `review/julia-v1` branch contains the September 2026 redesign, with a pastel title-only mosaic, Karrik headings and Inter body text. Each card caption shows its title, category and date when provided. Both fonts are served locally, with their licences and credits in `public/fonts/`. Existing photos remain available inside story pages.
 
 ## Run locally
 
@@ -56,7 +56,7 @@ All content lives in `app/content.ts`. Add an object to `storyLibrary`. The arra
 
 ## Add an investment
 
-Add the company to `portfolioCompanies` in `app/content.ts`, including its `name`, `tone` and optional personal `story`. Its individual card, Investments filter entry and `/story/investment-<company>` page are generated automatically. Keep `status: "incoming"` for entries that are not yet completed investments. No dates or investment details are invented when none are available.
+Add the company to `portfolioCompanies` in `app/content.ts`, including its `name`, `tone` and optional personal `story`. Its individual card, Investments filter entry and `/story/investment-<company>` page are generated automatically. Add `year: "2025"` only when the investment date is confirmed; omit it otherwise. Keep `status: "incoming"` for entries that are not yet completed investments. Status is displayed separately from the date. No dates or investment details are invented when none are available.
 
 The older `/story/investment-portfolio` overview remains available at its original address but no longer takes up a home-page box.
 
@@ -76,7 +76,7 @@ The render tests check the home page, every linked story, missing routes and loc
 
 The existing site is https://julia-internet-archive.aish-hitchikersway.chatgpt.site.
 
-`.openai/hosting.json` references the existing Sites project. Keep that ID. The current GitHub account (`faustinhavard-source`) has read-only access to `caliperce/julia-website`; the local `dev` branch has not been pushed. The existing Sites project is also unavailable to the current account.
+`.openai/hosting.json` references the existing Sites project. Keep that ID. The current GitHub account (`faustinhavard-source`) has read-only access to `caliperce/julia-website`. The review branch is prepared in the `faustinhavard-source/julia-website` fork. The existing Sites project is unavailable to the current account; sharing source does not publish a website preview.
 
 Before publishing or connecting Julia’s domain:
 

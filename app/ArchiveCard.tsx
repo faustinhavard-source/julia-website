@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { ArchiveEntry } from "./archive";
+import { archiveCategories, type ArchiveEntry } from "./archive";
 
 export function ArchiveCard({ entry }: { entry: ArchiveEntry }) {
   return (
@@ -9,7 +9,8 @@ export function ArchiveCard({ entry }: { entry: ArchiveEntry }) {
       </div>
       <div className="archive-card-caption">
         <h3>{entry.title}</h3>
-        <p>{entry.year}</p>
+        {entry.filter && <p className="archive-card-category">{archiveCategories[entry.filter]}{entry.status === "incoming" && <span> · Incoming</span>}</p>}
+        {entry.year && <p className="archive-card-year">{entry.year}</p>}
       </div>
     </Link>
   );

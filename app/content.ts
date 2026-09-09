@@ -26,7 +26,8 @@ export type StorySection = {
 export type Story = {
   slug: string;
   title: string;
-  year: string;
+  year?: string;
+  status?: "incoming";
   tag: string;
   filter?: StoryFilter;
   /** Keep unfinished entries out of the public site. Array order controls the mosaic. */
@@ -42,6 +43,8 @@ export type Story = {
 
 export type PortfolioCompany = {
   name: string;
+  /** Add only a confirmed investment year. */
+  year?: string;
   story?: string;
   status?: "incoming";
   size: "feature" | "quarter" | "third" | "half";
@@ -828,7 +831,8 @@ const storyLibrary: Story[] = [
 const investmentStories: Story[] = portfolioCompanies.map((company) => ({
   slug: `investment-${company.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
   title: company.name,
-  year: company.status === "incoming" ? "Incoming" : "Investment",
+  year: company.year,
+  status: company.status,
   tag: "investment",
   filter: "investments",
   summary: `${company.name} — ${company.status === "incoming" ? "incoming in" : "part of"} Julia Denoly’s investment portfolio.`,
