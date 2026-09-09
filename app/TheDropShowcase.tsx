@@ -42,7 +42,7 @@ export function TheDropShowcase() {
           <p className="kicker">THE DROP / PRODUCT ARCHIVE</p>
           <h2>Three demos from a video-first shop.</h2>
         </div>
-        <p>The demos play silently here. Click one to open it with sound and controls.</p>
+        <p>Three glimpses of the product in motion.</p>
       </div>
 
       <div className="drop-demo-grid">

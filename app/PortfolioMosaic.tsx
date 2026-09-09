@@ -10,7 +10,7 @@ export function PortfolioMosaic({ companies }: { companies: PortfolioCompany[] }
   return (
     <section className="portfolio-mosaic-experience" aria-label="Interactive portfolio company mosaic">
       <div className="portfolio-mosaic-layout">
-        <div className="company-mosaic" role="list" aria-label="Julia's portfolio companies">
+        <div className="company-mosaic" role="group" aria-label="Julia's portfolio companies">
           {companies.map((company, index) => (
             <button
               className="company-tile"
@@ -18,7 +18,6 @@ export function PortfolioMosaic({ companies }: { companies: PortfolioCompany[] }
               data-size={company.size}
               data-tone={company.tone}
               type="button"
-              role="listitem"
               aria-pressed={activeIndex === index}
               aria-controls="active-company-story"
               onPointerEnter={() => setActiveIndex(index)}

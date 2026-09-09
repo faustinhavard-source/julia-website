@@ -29,7 +29,8 @@ export type Story = {
   year: string;
   tag: string;
   filter?: StoryFilter;
-  index: string;
+  /** Keep unfinished entries out of the public site. Array order controls the mosaic. */
+  draft?: boolean;
   summary: string;
   intro: string;
   cover: MediaItem;
@@ -38,13 +39,6 @@ export type Story = {
   gallery?: MediaItem[];
   links?: Array<{ label: string; href: string }>;
 };
-
-export const filters: Array<{ label: string; value: "all" | StoryFilter }> = [
-  { label: "all", value: "all" },
-  { label: "work", value: "work" },
-  { label: "investments", value: "investments" },
-  { label: "side quests", value: "side-quests" },
-];
 
 export type PortfolioCompany = {
   name: string;
@@ -80,7 +74,6 @@ const storyLibrary: Story[] = [
     title: "About me",
     year: "Now",
     tag: "about",
-    index: "00",
     summary: "Kuala Lumpur, Hong Kong, France, fashion, founders, and finding life’s work.",
     intro: "A life split between creative industries, technology, and helping people find their life’s work.",
     cover: {
@@ -119,257 +112,17 @@ const storyLibrary: Story[] = [
     ],
   },
   {
-    slug: "corporate-life",
-    title: "Corporate life",
-    year: "Before the rabbit hole",
-    tag: "work",
-    filter: "work",
-    index: "01",
-    summary: "Four years learning how to buy, sell, distribute, and negotiate at scale.",
-    intro:
-      "Before startups, there was fashion: first buying inside LVMH, then leading French sales for a Dutch fashion-tech scale-up.",
-    cover: {
-      label: "LVMH / OTRIUM",
-      note: "runway, retail, or team image",
-      tone: "ink",
-    },
-    hero: {
-      label: "THE UNIQLO-DRESSED BUYER AT THE FASHION SHOW",
-      note: "corporate-era photo or press still",
-      tone: "ink",
-      aspect: "wide",
-    },
-    sections: [
-      {
-        title: "Le Bon Marché / LVMH",
-        dek: "Two years as a womenswear buyer.",
-        paragraphs: [
-          "I managed a $22M-turnover sector and a portfolio of 20 brands, including Burberry, Moncler and Max Mara. It was equal parts product instinct, commercial negotiation and operational detail.",
-        ],
-        stats: [
-          { value: "$22M", label: "sector turnover" },
-          { value: "20", label: "brands managed" },
-          { value: "2 yrs", label: "inside LVMH" },
-        ],
-      },
-      {
-        title: "Otrium",
-        dek: "Two years as Head of Sales, France.",
-        paragraphs: [
-          "I helped launch and grow the French business for the Dutch fashion-tech scale-up, bringing in $10M GMV in year one.",
-        ],
-        stats: [
-          { value: "$10M", label: "GMV in year one" },
-          { value: "France", label: "market launched" },
-          { value: "0→1", label: "commercial build" },
-        ],
-      },
-    ],
-    gallery: [
-      { label: "BUYING", note: "showroom / market week", tone: "silver" },
-      { label: "SALES", note: "Otrium team / launch", tone: "cobalt" },
-    ],
-  },
-  {
-    slug: "lvmh-concept-store",
-    title: "Tech-enabled concept store for LVMH",
-    year: "2018",
-    tag: "work",
-    filter: "work",
-    index: "02",
-    summary: "A confidential, tech-enabled retail concept dreamed up at 21.",
-    intro: "Three really delusional intrapreneurs spent close to 15 months imagining what the store after Colette could become.",
-    cover: {
-      label: "RETAIL, REWIRED",
-      note: "concept render / store plan",
-      tone: "cobalt",
-    },
-    hero: {
-      label: "DARE LVMH / CONCEPT 2018",
-      note: "architectural render or pitch-deck spread",
-      tone: "cobalt",
-      aspect: "wide",
-    },
-    sections: [
-      {
-        title: "The project",
-        paragraphs: [
-          "Most of this project was confidential, so I can’t share much. But we were a team of three really delusional individuals—Jonathan Noel, Anne-Sophie Laugier and me—and worked for close to 15 months as intrapreneurs on a new store concept for the LVMH group.",
-          "This was around the time the best-ever store in Paris, Colette, closed down. We came up with the idea of a tech-enabled experimental store at the DARE LVMH hackathon in 2018. I was 21 at the time.",
-          "We hired architects and designed several store plans, sourced incredible technologies to transform retail as we knew it, and explored working with KUKA on robotic arms for stock management, connected vending machines and weather capsules. Our mentors were Ian Rogers and Philippe Colin.",
-          "Then Covid hit. Retail was under enormous pressure, funding for the project was cut, and that was the end of that ride.",
-        ],
-      },
-    ],
-  },
-  {
-    slug: "collabforlove",
-    title: "Collabforlove",
-    year: "2020",
-    tag: "work",
-    filter: "work",
-    index: "03",
-    summary: "Flash auctions, improbable collectibles, and €500k+ raised for NGOs.",
-    intro:
-      "A social-commerce Instagram account built with Eole Peyron during Covid to raise money for the Paris Hospital Foundation, powered entirely by community and hustle.",
-    cover: {
-      label: "BID WITH LOVE",
-      note: "campaign montage / auction still",
-      tone: "red",
-    },
-    hero: {
-      label: "COLLABFORLOVE / THE AUCTION FEED",
-      note: "Instagram grid, campaign poster, or launch video",
-      tone: "red",
-      aspect: "wide",
-    },
-    sections: [
-      {
-        title: "The idea",
-        paragraphs: [
-          "We flash-auctioned collectibles and lifestyle experiences to support the Paris Hospital Foundation during Covid. There was no paid acquisition, just an Instagram account, an urgent cause and a lot of messages sent to strangers.",
-          "In under two months, 25,000 people joined the community. Over a year, the project raised more than €500,000 for multiple NGOs and appeared in 30+ media outlets. We were nominated for the 2020 Women of Influence award for contributing to the national effort.",
-        ],
-        stats: [
-          { value: "€500k+", label: "raised for NGOs" },
-          { value: "25k", label: "followers in <2 months" },
-          { value: "$0", label: "ad spend" },
-          { value: "30+", label: "media features" },
-        ],
-      },
-      {
-        title: "Some ridiculous things we auctioned",
-        bullets: [
-          "Zinedine Zidane’s signed football boots, sold for $4k",
-          "Lucas Pouille’s tennis racket, Tony Parker’s NBA hat and Vincent Clerc’s rugby boots",
-          "Caps from Loïck Peyron’s three America’s Cups",
-          "VIP tickets from 47TER and a collector LP from Bob Sinclar",
-          "A cooking experience with Juan Arbelaez and a Crazy Horse Paris VIP experience",
-          "Work by JR and an original piece created for Collabforlove by Soledad",
-        ],
-      },
-    ],
-    gallery: [
-      { label: "ZIDANE’S BOOTS", note: "WhatsApp image / auction result", tone: "lime", aspect: "portrait" },
-      { label: "SPORTS LOTS", note: "signed collectibles montage", tone: "pool", aspect: "square" },
-      { label: "MUSIC LOTS", note: "video clips / Bob Sinclar LP", tone: "lilac", aspect: "wide", kind: "video" },
-      { label: "ART FOR LOVE", note: "JR + Soledad pieces", tone: "sunflower", aspect: "square" },
-      { label: "BEHIND THE SCENES", note: "fun photos / community archive", tone: "blush", aspect: "wide" },
-    ],
-    links: [
-      { label: "Collabforlove on Instagram", href: "https://www.instagram.com/collabforlove/" },
-      { label: "Les Echos feature", href: "https://serielimitee.lesechos.fr/art-de-vivre/philanthropie/collab-for-love-1773823" },
-      { label: "Milk Magazine feature", href: "https://www.milkmagazine.net/article/suivre-collabforlove/" },
-      { label: "Crazy Horse collaboration", href: "https://www.lecrazyhorseparis.com/collab-for-love-octobre-rose/" },
-      { label: "Collabforlove on LinkedIn", href: "https://lnkd.in/p/evbXSqbY" },
-    ],
-  },
-  {
-    slug: "newtone-ai",
-    title: "Newtone AI",
-    year: "2022",
-    tag: "work",
-    filter: "work",
-    index: "04",
-    summary: "Brand-consistent e-commerce content, built just before ChatGPT arrived.",
-    intro:
-      "An LLM-powered content platform for digital-native brands and retailers, co-founded at Entrepreneurs First.",
-    cover: {
-      label: "NEW TONE, SAME VOICE",
-      note: "product UI / campaign copy",
-      tone: "lilac",
-    },
-    hero: {
-      label: "NEWTONE AI / PRODUCT",
-      note: "product demo or brand-content collage",
-      tone: "lilac",
-      aspect: "wide",
-    },
-    sections: [
-      {
-        title: "Before the category had a name",
-        paragraphs: [
-          "We built software for digital-native brands, retailers and e-commerce teams to scale online content while preserving tone of voice and brand consistency. This was just before ChatGPT made generative AI a dinner-table topic.",
-          "I met Henri de Bouteiller, our CPO, and Julien Sevenot Piltant, our CTO, at Entrepreneurs First. I was co-founder and CEO from day zero through our seed round.",
-        ],
-        stats: [
-          { value: "$1.5M", label: "seed round" },
-          { value: "Day 0", label: "built at EF" },
-          { value: "LLM", label: "before the hype cycle" },
-        ],
-      },
-      {
-        title: "Stepping out",
-        paragraphs: [
-          "I stepped out in July 2023. Henri became CEO and has grown Newtone into a solid business since then, working with some of the best retailers and surviving the SaaSpocalypse with a genuinely cool product.",
-        ],
-      },
-    ],
-    gallery: [
-      { label: "PRODUCT DEMO", note: "workflow video", tone: "midnight", aspect: "wide", kind: "video" },
-      { label: "EARLY PITCH", note: "deck / founding team", tone: "peach", aspect: "square" },
-    ],
-    links: [{ label: "Visit Newtone", href: "https://www.newtone.ai/" }],
-  },
-  {
-    slug: "the-drop",
-    title: "The Drop",
-    year: "2023",
-    tag: "company",
-    filter: "work",
-    index: "05",
-    summary: "A video-first social-commerce app that was fun, fast, and hard to monetize.",
-    intro:
-      "Built for small business owners, launched in the US, and co-founded with my forever co-founder Anastasia Wolter.",
-    cover: {
-      label: "WATCH IT. WANT IT.",
-      note: "mobile product screens / seller video",
-      tone: "pool",
-    },
-    hero: {
-      label: "THE DROP / MOBILE COMMERCE",
-      note: "vertical product demo montage",
-      tone: "pool",
-      aspect: "wide",
-    },
-    sections: [
-      {
-        title: "A shop that felt like a feed",
-        paragraphs: [
-          "We built a video-first social-commerce app for small business owners and launched it in the US. In two months, the platform generated €30k GMV.",
-          "It was genuinely cool and fun. It was also extremely difficult to make money from. Both things can be true.",
-        ],
-        stats: [
-          { value: "€30k", label: "GMV in two months" },
-          { value: "US", label: "launch market" },
-          { value: "video", label: "commerce, feed-first" },
-        ],
-      },
-      {
-        title: "The forever co-founder",
-        paragraphs: [
-          "I co-founded The Drop with Anastasia Wolter. The company did not last forever; the partnership did. We are still moving mountains together today.",
-        ],
-      },
-    ],
-    gallery: [
-      { label: "BUYER FLOW", note: "WhatsApp product demo", tone: "cobalt", aspect: "portrait", kind: "video" },
-      { label: "SELLER FLOW", note: "vertical upload demo", tone: "sunflower", aspect: "portrait", kind: "video" },
-      { label: "LAUNCH", note: "US market / first orders", tone: "red", aspect: "square" },
-    ],
-  },
-  {
     slug: "the-bridge",
     title: "The Bridge",
     year: "2025",
     tag: "work",
     filter: "work",
-    index: "06",
     summary: "Fifty technologists, eight weeks, one roof, and the search for a life’s work.",
     intro:
       "A founder residency in San Francisco backing exceptional individuals before they have a co-founder or an idea.",
     cover: {
-      label: "50 PEOPLE / ONE ROOF",
+      src: "/media/the-bridge/team.webp",
+      label: "The Bridge team by the San Francisco Bay",
       note: "residency portrait / house life",
       tone: "sunflower",
     },
@@ -430,16 +183,246 @@ const storyLibrary: Story[] = [
     links: [{ label: "Visit The Bridge", href: "https://www.join-thebridge.com/" }],
   },
   {
+    slug: "collabforlove",
+    title: "Collabforlove",
+    year: "2020",
+    tag: "work",
+    filter: "work",
+    summary: "Flash auctions, improbable collectibles, and €500k+ raised for NGOs.",
+    intro:
+      "A social-commerce Instagram account built with Eole Peyron during Covid to raise money for the Paris Hospital Foundation, powered entirely by community and hustle.",
+    cover: {
+      src: "/media/collabforlove/julia-eole-standing.webp",
+      label: "Julia and Eole, cofounders of Collabforlove",
+      note: "campaign montage / auction still",
+      tone: "red",
+    },
+    hero: {
+      label: "COLLABFORLOVE / THE AUCTION FEED",
+      note: "Instagram grid, campaign poster, or launch video",
+      tone: "red",
+      aspect: "wide",
+    },
+    sections: [
+      {
+        title: "The idea",
+        paragraphs: [
+          "We flash-auctioned collectibles and lifestyle experiences to support the Paris Hospital Foundation during Covid. There was no paid acquisition, just an Instagram account, an urgent cause and a lot of messages sent to strangers.",
+          "In under two months, 25,000 people joined the community. Over a year, the project raised more than €500,000 for multiple NGOs and appeared in 30+ media outlets. We were nominated for the 2020 Women of Influence award for contributing to the national effort.",
+        ],
+        stats: [
+          { value: "€500k+", label: "raised for NGOs" },
+          { value: "25k", label: "followers in <2 months" },
+          { value: "$0", label: "ad spend" },
+          { value: "30+", label: "media features" },
+        ],
+      },
+      {
+        title: "Some ridiculous things we auctioned",
+        bullets: [
+          "Zinedine Zidane’s signed football boots, sold for $4k",
+          "Lucas Pouille’s tennis racket, Tony Parker’s NBA hat and Vincent Clerc’s rugby boots",
+          "Caps from Loïck Peyron’s three America’s Cups",
+          "VIP tickets from 47TER and a collector LP from Bob Sinclar",
+          "A cooking experience with Juan Arbelaez and a Crazy Horse Paris VIP experience",
+          "Work by JR and an original piece created for Collabforlove by Soledad",
+        ],
+      },
+    ],
+    gallery: [
+      { label: "ZIDANE’S BOOTS", note: "WhatsApp image / auction result", tone: "lime", aspect: "portrait" },
+      { label: "SPORTS LOTS", note: "signed collectibles montage", tone: "pool", aspect: "square" },
+      { label: "MUSIC LOTS", note: "video clips / Bob Sinclar LP", tone: "lilac", aspect: "wide", kind: "video" },
+      { label: "ART FOR LOVE", note: "JR + Soledad pieces", tone: "sunflower", aspect: "square" },
+      { label: "BEHIND THE SCENES", note: "fun photos / community archive", tone: "blush", aspect: "wide" },
+    ],
+    links: [
+      { label: "Collabforlove on Instagram", href: "https://www.instagram.com/collabforlove/" },
+      { label: "Les Echos feature", href: "https://serielimitee.lesechos.fr/art-de-vivre/philanthropie/collab-for-love-1773823" },
+      { label: "Milk Magazine feature", href: "https://www.milkmagazine.net/article/suivre-collabforlove/" },
+      { label: "Crazy Horse collaboration", href: "https://www.lecrazyhorseparis.com/collab-for-love-octobre-rose/" },
+      { label: "Collabforlove on LinkedIn", href: "https://lnkd.in/p/evbXSqbY" },
+    ],
+  },
+  {
+    slug: "investment-portfolio",
+    title: "Investment portfolio",
+    year: "A growing list",
+    tag: "investing",
+    filter: "investments",
+    summary: "Early bets on obsessive people, with the personal story where there is one.",
+    intro:
+      "A mosaic of early bets. Hover, focus or tap a company to read the little story behind it.",
+    cover: {
+      label: "Early beliefs.",
+      note: "founder portraits / company marks",
+      tone: "peach",
+    },
+    hero: {
+      label: "PEOPLE BEFORE PITCH DECKS",
+      note: "portfolio mark wall or founder contact sheet",
+      tone: "peach",
+      aspect: "wide",
+    },
+    sections: [
+      {
+        title: "Eigen",
+        paragraphs: [
+          "Paul’s awesome. We met in November 2024 in Paris, well before Eigen was Eigen. He is the most obsessive product thinker I know. He is a visionary leader and magnetic personality who’s already taken Silicon Valley by a storm. I’m proud to be one of his first investors, but also a good friend.",
+        ],
+      },
+      {
+        title: "The portfolio",
+        items: [
+          { title: "Eigen", note: "one of the earliest believers" },
+          { title: "Uncovr" },
+          { title: "Tellia" },
+          { title: "Certo" },
+          { title: "Lemrock" },
+          { title: "Allude" },
+          { title: "Alassio" },
+          { title: "Synaps" },
+          { title: "Goldfish", note: "incoming" },
+          { title: "Avior", note: "incoming" },
+          { title: "Marv Labs", note: "incoming" },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "the-drop",
+    title: "The Drop",
+    year: "2023",
+    tag: "company",
+    filter: "work",
+    summary: "A video-first social-commerce app that was fun, fast, and hard to monetize.",
+    intro:
+      "Built for small business owners, launched in the US, and co-founded with my forever co-founder Anastasia Wolter.",
+    cover: {
+      src: "/media/the-drop/julia-anastasia-flight.jpg",
+      label: "Julia and Anastasia, cofounders of The Drop",
+      note: "mobile product screens / seller video",
+      tone: "pool",
+    },
+    hero: {
+      label: "THE DROP / MOBILE COMMERCE",
+      note: "vertical product demo montage",
+      tone: "pool",
+      aspect: "wide",
+    },
+    sections: [
+      {
+        title: "A shop that felt like a feed",
+        paragraphs: [
+          "We built a video-first social-commerce app for small business owners and launched it in the US. In two months, the platform generated €30k GMV.",
+          "It was genuinely cool and fun. It was also extremely difficult to make money from. Both things can be true.",
+        ],
+        stats: [
+          { value: "€30k", label: "GMV in two months" },
+          { value: "US", label: "launch market" },
+          { value: "video", label: "commerce, feed-first" },
+        ],
+      },
+      {
+        title: "The forever co-founder",
+        paragraphs: [
+          "I co-founded The Drop with Anastasia Wolter. The company did not last forever; the partnership did. We are still moving mountains together today.",
+        ],
+      },
+    ],
+    gallery: [
+      { label: "BUYER FLOW", note: "WhatsApp product demo", tone: "cobalt", aspect: "portrait", kind: "video" },
+      { label: "SELLER FLOW", note: "vertical upload demo", tone: "sunflower", aspect: "portrait", kind: "video" },
+      { label: "LAUNCH", note: "US market / first orders", tone: "red", aspect: "square" },
+    ],
+  },
+  {
+    slug: "newtone-ai",
+    title: "Newtone AI",
+    year: "2022",
+    tag: "work",
+    filter: "work",
+    summary: "Brand-consistent e-commerce content, built just before ChatGPT arrived.",
+    intro:
+      "An LLM-powered content platform for digital-native brands and retailers, co-founded at Entrepreneurs First.",
+    cover: {
+      label: "Newtone AI",
+      note: "product UI / campaign copy",
+      tone: "lilac",
+    },
+    hero: {
+      label: "NEWTONE AI / PRODUCT",
+      note: "product demo or brand-content collage",
+      tone: "lilac",
+      aspect: "wide",
+    },
+    sections: [
+      {
+        title: "Before the category had a name",
+        paragraphs: [
+          "We built software for digital-native brands, retailers and e-commerce teams to scale online content while preserving tone of voice and brand consistency. This was just before ChatGPT made generative AI a dinner-table topic.",
+          "I met Henri de Bouteiller, our CPO, and Julien Sevenot Piltant, our CTO, at Entrepreneurs First. I was co-founder and CEO from day zero through our seed round.",
+        ],
+        stats: [
+          { value: "$1.5M", label: "seed round" },
+          { value: "Day 0", label: "built at EF" },
+          { value: "LLM", label: "before the hype cycle" },
+        ],
+      },
+      {
+        title: "Stepping out",
+        paragraphs: [
+          "I stepped out in July 2023. Henri became CEO and has grown Newtone into a solid business since then, working with some of the best retailers and surviving the SaaSpocalypse with a genuinely cool product.",
+        ],
+      },
+    ],
+    gallery: [
+      { label: "PRODUCT DEMO", note: "workflow video", tone: "midnight", aspect: "wide", kind: "video" },
+      { label: "EARLY PITCH", note: "deck / founding team", tone: "peach", aspect: "square" },
+    ],
+    links: [{ label: "Visit Newtone", href: "https://www.newtone.ai/" }],
+  },
+  {
+    slug: "lvmh-concept-store",
+    title: "Tech-enabled concept store for LVMH",
+    year: "2018",
+    tag: "work",
+    filter: "work",
+    summary: "A confidential, tech-enabled retail concept dreamed up at 21.",
+    intro: "Three really delusional intrapreneurs spent close to 15 months imagining what the store after Colette could become.",
+    cover: {
+      label: "LVMH",
+      note: "concept render / store plan",
+      tone: "cobalt",
+    },
+    hero: {
+      label: "DARE LVMH / CONCEPT 2018",
+      note: "architectural render or pitch-deck spread",
+      tone: "cobalt",
+      aspect: "wide",
+    },
+    sections: [
+      {
+        title: "The project",
+        paragraphs: [
+          "Most of this project was confidential, so I can’t share much. But we were a team of three really delusional individuals—Jonathan Noel, Anne-Sophie Laugier and me—and worked for close to 15 months as intrapreneurs on a new store concept for the LVMH group.",
+          "This was around the time the best-ever store in Paris, Colette, closed down. We came up with the idea of a tech-enabled experimental store at the DARE LVMH hackathon in 2018. I was 21 at the time.",
+          "We hired architects and designed several store plans, sourced incredible technologies to transform retail as we knew it, and explored working with KUKA on robotic arms for stock management, connected vending machines and weather capsules. Our mentors were Ian Rogers and Philippe Colin.",
+          "Then Covid hit. Retail was under enormous pressure, funding for the project was cut, and that was the end of that ride.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "rare-cacti-marketplace",
     title: "Rare Cacti Marketplace",
     year: "2022",
     tag: "side quest",
     filter: "side-quests",
-    index: "07",
     summary: "An online marketplace for rare-cacti owners—and a domain worth being proud of.",
     intro: "Launched an online marketplace for rare-cacti owners. I’m the proud owner of cacthusiasts.com.",
     cover: {
-      label: "CACTHUSIASTS.COM",
+      label: "Cacthusiasts",
       note: "marketplace screenshot or rare-cacti photography",
       tone: "lime",
     },
@@ -465,11 +448,10 @@ const storyLibrary: Story[] = [
     year: "Ongoing",
     tag: "side quest",
     filter: "side-quests",
-    index: "08",
     summary: "A Normandy cider and Calvados farm, three tonnes of spirits, and an unfinished American plan.",
     intro: "A family cider and Calvados farm in Normandy, and a business plan that keeps coming back.",
     cover: {
-      label: "NORMANDY CIDER FARM",
+      label: "Cider farm",
       note: "farm, orchard, bottles or family archive",
       tone: "sunflower",
     },
@@ -494,11 +476,10 @@ const storyLibrary: Story[] = [
     year: "2019",
     tag: "side quest",
     filter: "side-quests",
-    index: "09",
     summary: "Daytona’s Stable: an absurd and thrilling investment with twenty university friends.",
     intro: "Daytona’s Stable might be ten times more fun than venture investing—and perhaps ten times less profitable.",
     cover: {
-      label: "DAYTONA’S STABLE",
+      label: "Daytona’s stable",
       note: "race-day or stable media",
       tone: "cobalt",
     },
@@ -523,11 +504,11 @@ const storyLibrary: Story[] = [
     year: "September 2025",
     tag: "side quest",
     filter: "side-quests",
-    index: "10",
     summary: "Meta Consumer Hackathon, September 2025.",
     intro: "Meta Consumer Hackathon, September 2025.",
     cover: {
-      label: "META CONSUMER HACKATHON",
+      src: "/media/random-things/meta-team-original.png",
+      label: "The Meta Consumer Hackathon team",
       note: "event media already available",
       tone: "pool",
     },
@@ -545,11 +526,11 @@ const storyLibrary: Story[] = [
     year: "April 2025",
     tag: "side quest",
     filter: "side-quests",
-    index: "11",
     summary: "Mistral AI Game Jam, April 2025.",
     intro: "Mistral AI Game Jam, April 2025.",
     cover: {
-      label: "MISTRAL AI GAME JAM",
+      src: "/media/random-things/mistral-julia-anastasia-original.webp",
+      label: "Julia and Anastasia at the Mistral AI Game Jam",
       note: "event media already available",
       tone: "red",
     },
@@ -568,11 +549,10 @@ const storyLibrary: Story[] = [
     year: "April 2025",
     tag: "side quest",
     filter: "side-quests",
-    index: "12",
     summary: "Europe’s biggest and first Robotics Hackathon, April 2025.",
     intro: "Europe’s biggest and first Robotics Hackathon, April 2025.",
     cover: {
-      label: "ROBOTICS HACKATHON",
+      label: "Robotics hackathon",
       note: "event media to be selected",
       tone: "silver",
     },
@@ -591,11 +571,10 @@ const storyLibrary: Story[] = [
     year: "May 2025",
     tag: "side quest",
     filter: "side-quests",
-    index: "13",
     summary: "A technical community and online webinar series, built with friends.",
     intro: "A tech-focused community and a series of technical webinars online.",
     cover: {
-      label: "SOTA COMMUNITY",
+      label: "SOTA",
       note: "identity or webinar media",
       tone: "midnight",
     },
@@ -616,12 +595,64 @@ const storyLibrary: Story[] = [
     links: [{ label: "Watch the SOTA webinar series", href: "https://watch.getcontrast.io/sota" }],
   },
   {
+    slug: "corporate-life",
+    draft: true,
+    title: "Corporate life",
+    year: "Before the rabbit hole",
+    tag: "work",
+    filter: "work",
+    summary: "Four years learning how to buy, sell, distribute, and negotiate at scale.",
+    intro:
+      "Before startups, there was fashion: first buying inside LVMH, then leading French sales for a Dutch fashion-tech scale-up.",
+    cover: {
+      label: "LVMH / OTRIUM",
+      note: "runway, retail, or team image",
+      tone: "ink",
+    },
+    hero: {
+      label: "THE UNIQLO-DRESSED BUYER AT THE FASHION SHOW",
+      note: "corporate-era photo or press still",
+      tone: "ink",
+      aspect: "wide",
+    },
+    sections: [
+      {
+        title: "Le Bon Marché / LVMH",
+        dek: "Two years as a womenswear buyer.",
+        paragraphs: [
+          "I managed a $22M-turnover sector and a portfolio of 20 brands, including Burberry, Moncler and Max Mara. It was equal parts product instinct, commercial negotiation and operational detail.",
+        ],
+        stats: [
+          { value: "$22M", label: "sector turnover" },
+          { value: "20", label: "brands managed" },
+          { value: "2 yrs", label: "inside LVMH" },
+        ],
+      },
+      {
+        title: "Otrium",
+        dek: "Two years as Head of Sales, France.",
+        paragraphs: [
+          "I helped launch and grow the French business for the Dutch fashion-tech scale-up, bringing in $10M GMV in year one.",
+        ],
+        stats: [
+          { value: "$10M", label: "GMV in year one" },
+          { value: "France", label: "market launched" },
+          { value: "0→1", label: "commercial build" },
+        ],
+      },
+    ],
+    gallery: [
+      { label: "BUYING", note: "showroom / market week", tone: "silver" },
+      { label: "SALES", note: "Otrium team / launch", tone: "cobalt" },
+    ],
+  },
+  {
     slug: "random-things",
+    draft: true,
     title: "Random things",
     year: "2024–2025",
     tag: "side quests",
     filter: "side-quests",
-    index: "07",
     summary: "Art shows, game jams, robots, hackathons, and a technical community.",
     intro:
       "Not companies and not exactly hobbies, just a collection of rooms I was lucky enough to help make more interesting.",
@@ -673,11 +704,11 @@ const storyLibrary: Story[] = [
   },
   {
     slug: "weird-things",
+    draft: true,
     title: "Things I inexplicably own / do",
     year: "Ongoing",
     tag: "weird",
     filter: "side-quests",
-    index: "08",
     summary: "Rare cacti, plane crashes, three tonnes of spirits, and one racehorse syndicate.",
     intro:
       "The page most likely to explain me, or make me substantially harder to explain.",
@@ -712,57 +743,11 @@ const storyLibrary: Story[] = [
     links: [{ label: "A domain I’m proud to own", href: "https://cacthusiasts.com/" }],
   },
   {
-    slug: "investment-portfolio",
-    title: "Investment portfolio",
-    year: "A growing list",
-    tag: "investing",
-    filter: "investments",
-    index: "09",
-    summary: "Early bets on obsessive people, with the personal story where there is one.",
-    intro:
-      "A mosaic of early bets. Hover, focus or tap a company to read the little story behind it.",
-    cover: {
-      label: "EARLY BELIEFS",
-      note: "founder portraits / company marks",
-      tone: "peach",
-    },
-    hero: {
-      label: "PEOPLE BEFORE PITCH DECKS",
-      note: "portfolio mark wall or founder contact sheet",
-      tone: "peach",
-      aspect: "wide",
-    },
-    sections: [
-      {
-        title: "Eigen",
-        paragraphs: [
-          "Paul’s awesome. We met in November 2024 in Paris, well before Eigen was Eigen. He is the most obsessive product thinker I know. He is a visionary leader and magnetic personality who’s already taken Silicon Valley by a storm. I’m proud to be one of his first investors, but also a good friend.",
-        ],
-      },
-      {
-        title: "The portfolio",
-        items: [
-          { title: "Eigen", note: "one of the earliest believers" },
-          { title: "Uncovr" },
-          { title: "Tellia" },
-          { title: "Certo" },
-          { title: "Lemrock" },
-          { title: "Allude" },
-          { title: "Alassio" },
-          { title: "Synaps" },
-          { title: "Goldfish", note: "incoming" },
-          { title: "Avior", note: "incoming" },
-          { title: "Marv Labs", note: "incoming" },
-        ],
-      },
-    ],
-  },
-  {
     slug: "reading-listening",
+    draft: true,
     title: "Reading / listening",
     year: "An open shelf",
     tag: "list",
-    index: "10",
     summary: "The books, essays, podcasts and rabbit holes currently shaping the thinking.",
     intro:
       "A deliberately unfinished shelf. The structure is ready; Julia’s current recommendations can drop in as notes, covers, links or voice memos.",
@@ -800,10 +785,10 @@ const storyLibrary: Story[] = [
   },
   {
     slug: "lets-chat",
+    draft: true,
     title: "Let’s chat",
     year: "Open inbox",
     tag: "contact",
-    index: "11",
     summary: "Hiring, fundraising, GTM, sales, introductions, or one of the stranger topics.",
     intro:
       "I invest through The Bridge and Entrepreneurs First, and I also help founders ad hoc when the right introduction or honest conversation can unlock something.",
@@ -839,34 +824,9 @@ const storyLibrary: Story[] = [
   },
 ];
 
-const pageOrder = [
-  "about-julia",
-  "lvmh-concept-store",
-  "collabforlove",
-  "newtone-ai",
-  "the-drop",
-  "the-bridge",
-  "investment-portfolio",
-  "rare-cacti-marketplace",
-  "cider-farm",
-  "daytonas-stable",
-  "meta-consumer-hackathon",
-  "mistral-ai-game-jam",
-  "robotics-hackathon",
-  "sota-community",
-];
-
-export const bioStory = storyLibrary.find((entry) => entry.slug === "about-julia")!;
-
-export const stories: Story[] = pageOrder.map((slug, index) => {
-  const story = storyLibrary.find((entry) => entry.slug === slug);
-  if (!story) throw new Error(`Missing story: ${slug}`);
-
-  return {
-    ...story,
-    index: String(index).padStart(2, "0"),
-  };
-});
+// Add a story above to create its page and archive card automatically.
+export const stories = storyLibrary.filter((story) => !story.draft);
+export const bioStory = stories.find((story) => story.slug === "about-julia")!;
 
 export function getStory(slug: string) {
   return stories.find((story) => story.slug === slug);

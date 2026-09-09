@@ -1,11 +1,23 @@
 import type { Metadata } from "next";
 import HomeIndex from "./HomeIndex";
+import { FooterNote, HomeIntro, SiteHeader } from "./components";
+import { stories } from "./content";
 
 export const metadata: Metadata = {
-  title: "Julia: work, investments & side quests",
-  description: "Julia’s work, investments, side quests, and the stories behind them.",
+  title: "Julia Denoly — work, investments & side quests",
+  description: "Building things. Backing people. Julia Denoly’s work, investments and side quests.",
 };
 
 export default function Home() {
-  return <HomeIndex />;
+  const entries = stories.filter((story) => story.filter).map(({ slug, title, year, filter, cover }) => ({ slug, title, year, filter, cover }));
+  return (
+    <div className="site-shell">
+      <SiteHeader />
+      <main className="home-main" id="main-content">
+        <HomeIntro />
+        <HomeIndex entries={entries} />
+      </main>
+      <FooterNote />
+    </div>
+  );
 }

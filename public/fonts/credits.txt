@@ -1,0 +1,7 @@
+Karrik, by Jean-Baptiste Morizot and Lucas Le Bihan. Published by Velvetyne.
+https://velvetyne.fr/fonts/karrik/
+Licensed under the SIL Open Font License 1.1. See Karrik-LICENSE.txt.
+
+Inter, by Rasmus Andersson.
+https://rsms.me/inter/
+Licensed under the SIL Open Font License 1.1. See Inter-LICENSE.txt.

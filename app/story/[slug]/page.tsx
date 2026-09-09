@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CollabforlovePolaroids } from "../../CollabforlovePolaroids";
 import { CollabforloveStoryCollage } from "../../CollabforloveStoryCollage";
@@ -6,7 +7,7 @@ import { LightboxImage } from "../../LightboxImage";
 import { PortfolioMosaic } from "../../PortfolioMosaic";
 import { RandomLinkButton, RandomThingsMedia, RandomYouTubeEmbed } from "../../RandomThingsMedia";
 import { TheDropShowcase } from "../../TheDropShowcase";
-import { MediaFrame, SiteHeader } from "../../components";
+import { FooterNote, MediaFrame, SiteHeader } from "../../components";
 import { getStory, portfolioCompanies, stories } from "../../content";
 
 type StoryPageProps = {
@@ -43,18 +44,16 @@ export default async function StoryPage({ params }: StoryPageProps) {
     <div className="site-shell story-shell">
       <SiteHeader />
 
-      <main className={`story-page story-${story.slug} ${story.slug === "investment-portfolio" ? "portfolio-story-page" : ""}`}>
+      <main id="main-content" className={`story-page story-${story.slug} ${story.slug === "investment-portfolio" ? "portfolio-story-page" : ""}`}>
         <header className="story-heading">
+          <nav className="breadcrumbs" aria-label="Breadcrumb">
+            <Link href="/#work">All work</Link>
+            <span aria-hidden="true">/</span>
+            <span>{sectionLabel}</span>
+          </nav>
           <h1>{story.title}</h1>
           <p className="story-year">{story.year}</p>
           <p className="story-category"><span className="tag">{story.tag}</span></p>
-          <nav className="breadcrumbs" aria-label="Breadcrumb">
-            <a href="/">work</a>
-            <span aria-hidden="true">/</span>
-            <span>{sectionLabel}</span>
-            <span aria-hidden="true">/</span>
-            <span>{story.slug.replaceAll("-", " ")}</span>
-          </nav>
           {story.slug === "newtone-ai" && (
             <a className="story-website-link" href="https://www.newtone.ai/" target="_blank" rel="noreferrer">
               newtone.ai ↗
@@ -192,7 +191,7 @@ export default async function StoryPage({ params }: StoryPageProps) {
             </div>
             <div className="gallery-grid">
               {story.gallery.map((media, index) => (
-                <MediaFrame media={media} key={`${media.label}-${index}`} />
+                <MediaFrame media={media} loading="lazy" key={`${media.label}-${index}`} />
               ))}
             </div>
           </section>
@@ -212,6 +211,7 @@ export default async function StoryPage({ params }: StoryPageProps) {
           </section>
         )}
       </main>
+      <FooterNote />
     </div>
   );
 }
