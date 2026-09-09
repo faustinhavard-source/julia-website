@@ -76,7 +76,11 @@ The render tests check the home page, every linked story, missing routes and loc
 
 This review copy belongs to Faustin. Its source is maintained in `faustinhavard-source/julia-website`, on the default branch `review/julia-v1`. Publishing this copy does not require access to Aïch’s hosting account.
 
+Public review: https://julia-website-review.vercel.app. The Vercel project is `julia-website-review` in Faustin’s personal workspace, `faustinhavard-5877s-projects`.
+
 `vercel.json` prepares a static deployment from this repository. `npm run build:preview` exports every story, its React navigation data, and its media into `dist/client`. The normal build remains available for Cloudflare Workers. No application database or server secrets are required.
+
+Deploy a validated update with `vercel deploy --prod --project julia-website-review --scope faustinhavard-5877s-projects`. GitHub pushes currently save the source; deployment is a separate step. `.vercelignore` excludes local environment files, credentials and development output.
 
 The Vercel production domain is used for social metadata during hosted builds. `NEXT_PUBLIC_SITE_URL` can override it when Julia’s custom domain is connected.
 
