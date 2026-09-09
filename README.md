@@ -74,18 +74,13 @@ The render tests check the home page, every linked story, missing routes and loc
 
 ## Hosting and domain
 
-The existing site is https://julia-internet-archive.aish-hitchikersway.chatgpt.site.
+This review copy belongs to Faustin. Its source is maintained in `faustinhavard-source/julia-website`, on the `review/julia-v1` branch. It uses an independent Sites project; `.openai/hosting.json` identifies this copy’s hosting project. Future updates should reuse that ID.
 
-`.openai/hosting.json` references the existing Sites project. Keep that ID. The current GitHub account (`faustinhavard-source`) has read-only access to `caliperce/julia-website`. The review branch is prepared in the `faustinhavard-source/julia-website` fork. The existing Sites project is unavailable to the current account; sharing source does not publish a website preview.
+Hosting address: https://julia-website-review.jambon-beurre.chatgpt.site.
 
-Before publishing or connecting Julia’s domain:
+The original site and its hosting remain separate. Publishing this copy does not require access to Aïch’s hosting account.
 
-1. Get collaborator write access to the GitHub repository and editor access to the existing Sites project from its owner.
-2. Confirm Julia’s exact domain and the service managing its DNS.
-3. Register the domain against the existing hosting project and use the exact verification/routing records returned by that host.
-4. Add only those records, preserve mail and other DNS records, then verify the domain and HTTPS.
-
-The September redesign has not changed the live site or any DNS records.
+To connect Julia’s domain, confirm its exact name and DNS provider, register it with this hosting project, and apply only the verification and routing records returned by the host. Preserve existing email and other DNS records. No DNS records have been changed.
 
 ## Visual references
 
