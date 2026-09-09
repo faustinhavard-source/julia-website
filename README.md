@@ -74,11 +74,13 @@ The render tests check the home page, every linked story, missing routes and loc
 
 ## Hosting and domain
 
-This review copy belongs to Faustin. Its source is maintained in `faustinhavard-source/julia-website`, on the `review/julia-v1` branch. It uses an independent Sites project; `.openai/hosting.json` identifies this copy’s hosting project. Future updates should reuse that ID.
+This review copy belongs to Faustin. Its source is maintained in `faustinhavard-source/julia-website`, on the default branch `review/julia-v1`. Publishing this copy does not require access to Aïch’s hosting account.
 
-Hosting address: https://julia-website-review.jambon-beurre.chatgpt.site.
+`vercel.json` prepares a static deployment from this repository. `npm run build:preview` exports every story, its React navigation data, and its media into `dist/client`. The normal build remains available for Cloudflare Workers. No application database or server secrets are required.
 
-The original site and its hosting remain separate. Publishing this copy does not require access to Aïch’s hosting account.
+The Vercel production domain is used for social metadata during hosted builds. `NEXT_PUBLIC_SITE_URL` can override it when Julia’s custom domain is connected.
+
+An independent Sites project is also registered in `.openai/hosting.json`, but the initial source upload failed on large media files; no version of this copy has been published there. Preserve its ID if resuming Sites hosting.
 
 To connect Julia’s domain, confirm its exact name and DNS provider, register it with this hosting project, and apply only the verification and routing records returned by the host. Preserve existing email and other DNS records. No DNS records have been changed.
 

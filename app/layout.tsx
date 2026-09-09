@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export function generateMetadata(): Metadata {
-  const metadataBase = new URL("https://julia-website-review.jambon-beurre.chatgpt.site");
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+    ?? (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "https://julia-website-review.jambon-beurre.chatgpt.site");
+  const metadataBase = new URL(siteUrl);
   const socialImage = new URL("/og.png", metadataBase).toString();
 
   return {

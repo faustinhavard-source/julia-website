@@ -1,0 +1,12 @@
+{
+  "framework": null,
+  "buildCommand": "npm run build:preview",
+  "outputDirectory": "dist/client",
+  "cleanUrls": true,
+  "headers": [
+    {
+      "source": "/:path*.rsc",
+      "headers": [{ "key": "Content-Type", "value": "text/x-component" }]
+    }
+  ]
+}
