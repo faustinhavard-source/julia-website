@@ -824,8 +824,26 @@ const storyLibrary: Story[] = [
   },
 ];
 
+// Each portfolio company gets its own page and archive card from the same record.
+const investmentStories: Story[] = portfolioCompanies.map((company) => ({
+  slug: `investment-${company.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
+  title: company.name,
+  year: company.status === "incoming" ? "Incoming" : "Investment",
+  tag: "investment",
+  filter: "investments",
+  summary: `${company.name} — ${company.status === "incoming" ? "incoming in" : "part of"} Julia Denoly’s investment portfolio.`,
+  intro: company.story ?? (company.status === "incoming" ? "Incoming." : "Part of my investment portfolio. A little story will live here soon."),
+  cover: { label: company.name, note: "", tone: company.tone },
+  hero: { label: company.name, note: "", tone: company.tone },
+  sections: [],
+}));
+
 // Add a story above to create its page and archive card automatically.
-export const stories = storyLibrary.filter((story) => !story.draft);
+// Keep the original portfolio URL available, while expanding its companies in the archive.
+export const stories = storyLibrary.filter((story) => !story.draft).flatMap((story) =>
+  story.slug === "investment-portfolio" ? [story, ...investmentStories] : [story],
+);
+export const archiveStories = stories.filter((story) => story.filter && story.slug !== "investment-portfolio");
 export const bioStory = stories.find((story) => story.slug === "about-julia")!;
 
 export function getStory(slug: string) {

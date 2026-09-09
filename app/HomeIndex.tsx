@@ -29,7 +29,7 @@ export default function HomeIndex({ entries }: { entries: ArchiveEntry[] }) {
       </div>
       <p className="sr-only" role="status">{visibleEntries.length} projects shown</p>
       <div className="archive-grid" id="archive-grid">
-        {visibleEntries.map((entry, index) => <ArchiveCard entry={entry} priority={index < 3} key={entry.slug} />)}
+        {visibleEntries.map((entry) => <ArchiveCard entry={entry} key={entry.slug} />)}
       </div>
     </section>
   );

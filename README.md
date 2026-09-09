@@ -1,6 +1,6 @@
 # Julia’s website
 
-Julia’s personal archive: work, investments and side quests. The `dev` branch contains the September 2026 redesign, with a photo mosaic, Karrik headings and Inter body text. Both fonts are served locally, with their licences and credits in `public/fonts/`.
+Julia’s personal archive: work, investments and side quests. The `dev` branch contains the September 2026 redesign, with a pastel title-only mosaic, Karrik headings and Inter body text. Both fonts are served locally, with their licences and credits in `public/fonts/`. Existing photos remain available inside story pages.
 
 ## Run locally
 
@@ -46,13 +46,19 @@ All content lives in `app/content.ts`. Add an object to `storyLibrary`. The arra
 ```
 
 - Put photos in `public/media/<slug>/`; use their `/media/...` paths in the entry.
-- Leave out `cover.src` to show a simple typographic placeholder. Set `label` to the words you want in the placeholder.
+- Home-page boxes currently show the entry title on a pastel background selected by `cover.tone`. The cover photo is retained for the story page and for a future photo-based home page.
 - Set `draft: true` to keep an entry out of the site while it is unfinished.
 - Omit `filter` for a standalone page such as About, without a home-page box.
 - New entries automatically appear under the relevant filter and get a `/story/<slug>` page.
 - Use `gallery` for additional photos and `links` for external references.
 
-`ArchiveCard.tsx` handles every home-page box. The same `MediaFrame` component handles the media, so adding photos does not require changes to the layout. The home page sends only card information to the interactive grid, keeping full project stories on the server.
+`ArchiveCard.tsx` handles every home-page box. `MediaFrame` handles media inside story pages. The home page sends only card information to the interactive grid, keeping full project stories on the server.
+
+## Add an investment
+
+Add the company to `portfolioCompanies` in `app/content.ts`, including its `name`, `tone` and optional personal `story`. Its individual card, Investments filter entry and `/story/investment-<company>` page are generated automatically. Keep `status: "incoming"` for entries that are not yet completed investments. No dates or investment details are invented when none are available.
+
+The older `/story/investment-portfolio` overview remains available at its original address but no longer takes up a home-page box.
 
 ## Design and validation
 

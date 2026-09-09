@@ -1,5 +1,7 @@
 # Julia's Website — Revision Brief
 
+> **Latest September 9 refinement:** one home-page box per portfolio company, replacing the single aggregate portfolio box. The home mosaic uses titles on varied pastel squares, without photos for now. Existing media is retained in story pages. This supersedes the earlier single-portfolio-box decision below.
+
 > **September 9, 2026 — current design direction on `dev`:** modern, clean and minimal; retain the mosaic, use Karrik headings and Inter body text, more whitespace, a white/ink palette with yellow accents, and one source of truth for new boxes. This newer request supersedes the earlier font and styling choices below. The earlier content decisions remain useful background. See `README.md` for the current editing and validation guide.
 
 **Feedback received:** August 25, 2026  
