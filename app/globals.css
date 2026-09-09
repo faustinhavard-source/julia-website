@@ -1,17 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Platypi:ital,wght@0,400..800;1,400..800&display=swap");
 
-@font-face {
-  font-family: "Geometric 231 Heavy";
-  src: url("/fonts/geometric-231-heavy-regular.otf") format("opentype");
-  font-style: normal;
-  font-weight: 900;
-  font-display: swap;
-}
-
 :root {
-  --display: "Geometric 231 Heavy", "Arial Black", "Helvetica Neue", Arial, sans-serif;
-  --editorial: "Platypi", Georgia, "Times New Roman", serif;
-  --sans: "Helvetica Neue", Arial, sans-serif;
+  --type: "Platypi", Georgia, "Times New Roman", serif;
+  --display: var(--type);
+  --editorial: var(--type);
+  --sans: var(--type);
   --paper: #f7f5ef;
   --ink: #171717;
   --muted: #6d6b66;
@@ -19,8 +12,11 @@
   --soft-rule: rgba(23, 23, 23, 0.2);
   --highlight: #f3dc32;
   --accent: #f3dc32;
-  --mono: "IBM Plex Mono", "Courier New", Courier, monospace;
-  --pad: clamp(16px, 2vw, 28px);
+  --mono: var(--type);
+  --pad: clamp(18px, 2.4vw, 40px);
+  --text-small: 0.875rem;
+  --text-body: 1rem;
+  --text-title: 1.375rem;
 }
 
 * {
@@ -36,8 +32,8 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--sans);
-  font-size: 14px;
-  line-height: 1.45;
+  font-size: var(--text-body);
+  line-height: 1.5;
   text-rendering: optimizeLegibility;
 }
 
@@ -2942,5 +2938,711 @@ a {
 
   .site-footer > :nth-child(2) {
     display: block;
+  }
+}
+
+/* Platypi-only type system and tighter editorial rhythm. */
+
+.site-header {
+  padding-top: 16px;
+  padding-bottom: 14px;
+}
+
+.wordmark,
+.clutter-toolbar h1,
+.card-meta h3,
+.story-title-wrap h1,
+.section-label h2,
+.portfolio-front-heading h1,
+.portfolio-mosaic-heading h2,
+.company-story-panel h2,
+.drop-demo-heading h2,
+.archive-section-heading h2,
+.index-intro h1,
+.story-next a {
+  font-family: var(--type);
+  font-size: var(--text-title);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.wordmark {
+  margin-bottom: 5px;
+}
+
+.identity-copy {
+  max-width: 78rem;
+}
+
+.identity-copy p {
+  font-size: var(--text-body);
+  line-height: 1.48;
+}
+
+.social-list {
+  gap: 5px;
+  font-family: var(--type);
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: 1.48;
+}
+
+.home-main {
+  padding-right: var(--pad);
+  padding-left: var(--pad);
+}
+
+.clutter-index {
+  padding-top: 24px;
+  padding-bottom: 64px;
+}
+
+.clutter-toolbar {
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.clutter-toolbar h1 {
+  margin-bottom: 0;
+}
+
+.filter-row {
+  gap: 8px;
+}
+
+.filter-row button,
+.tag {
+  font-size: var(--text-small);
+}
+
+.filter-row button {
+  min-height: 34px;
+  padding: 7px 12px;
+}
+
+.clutter-grid,
+.story-grid {
+  gap: 38px 18px;
+}
+
+.card-meta {
+  padding-top: 9px;
+}
+
+.card-meta h3 {
+  margin-top: 1px;
+}
+
+.card-year,
+.card-summary,
+.read-more,
+.site-footer,
+.breadcrumbs,
+.lead-index,
+.media-frame figcaption,
+.section-label > span,
+.section-label p,
+.stat-grid dd,
+.gallery-heading > p:last-child,
+.reference-links a span,
+.story-next > span,
+.portfolio-mosaic-heading > p,
+.company-story-meta,
+.company-story-kicker,
+.company-story-instruction,
+.company-tile-index,
+.company-tile-state,
+.drop-demo-heading > p,
+.drop-demo-meta span,
+.collab-collage-label,
+.collab-polaroid-note,
+.random-media-strip figcaption,
+.random-youtube-embed figcaption,
+.item-list article > span {
+  font-size: var(--text-small);
+  line-height: 1.45;
+}
+
+.story-page {
+  width: min(1480px, calc(100% - (2 * var(--pad))));
+  padding-top: 32px;
+  padding-bottom: 64px;
+}
+
+.story-heading {
+  margin-bottom: 24px;
+}
+
+.breadcrumbs {
+  margin-bottom: 28px;
+}
+
+.story-title-wrap {
+  align-items: center;
+}
+
+.story-stamp {
+  gap: 5px;
+  font-size: var(--text-small);
+}
+
+.story-website-link {
+  font-size: var(--text-small);
+}
+
+.story-lead {
+  gap: 28px;
+  padding-top: 30px;
+  padding-bottom: 38px;
+}
+
+.story-lead > p:last-child,
+.section-body > p,
+.story-about-julia .section-body > p,
+.story-weird-things .item-list p,
+.company-story-copy,
+.company-story-placeholder,
+.drop-demo-meta p {
+  font-family: var(--type);
+  font-size: var(--text-body);
+  line-height: 1.62;
+  letter-spacing: 0;
+}
+
+.story-section {
+  gap: 28px;
+  padding-top: 28px;
+  padding-bottom: 34px;
+}
+
+.section-label h2 {
+  max-width: 17rem;
+  margin-top: 0;
+}
+
+.section-label p {
+  max-width: 17rem;
+}
+
+.section-body > p {
+  margin-bottom: 14px;
+}
+
+.stat-grid {
+  margin-top: 24px;
+}
+
+.stat-grid > div {
+  min-height: 98px;
+  padding: 13px;
+}
+
+.stat-grid dt {
+  margin-bottom: 18px;
+  font-size: var(--text-title);
+  letter-spacing: -0.02em;
+}
+
+.gallery-section {
+  padding-top: 50px;
+  padding-bottom: 48px;
+}
+
+.gallery-heading {
+  margin-bottom: 22px;
+}
+
+.gallery-heading h2,
+.reference-links h2,
+.item-list h3,
+.drop-demo-meta h3,
+.collab-polaroid figcaption h3,
+.story-about-julia .item-list h3,
+.story-weird-things .item-list h3 {
+  font-size: var(--text-body);
+  line-height: 1.45;
+}
+
+.reference-links {
+  padding-top: 28px;
+  padding-bottom: 42px;
+}
+
+.story-next {
+  padding-top: 24px;
+}
+
+.portfolio-front {
+  min-height: 0;
+  padding-top: 36px;
+  padding-bottom: 44px;
+}
+
+.portfolio-front-heading,
+.portfolio-mosaic-heading,
+.drop-demo-heading,
+.archive-section-heading {
+  margin-bottom: 24px;
+}
+
+.portfolio-mosaic-experience {
+  padding-top: 18px;
+  padding-bottom: 52px;
+}
+
+.company-wall li,
+.company-tile-name,
+.company-tile[data-size="feature"] .company-tile-name {
+  font-family: var(--type);
+  font-size: var(--text-title);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.company-story-panel {
+  min-height: 420px;
+}
+
+.drop-showcase,
+.bridge-team-photo {
+  margin-bottom: 52px;
+}
+
+.drop-showcase {
+  padding-bottom: 0;
+}
+
+.drop-demo-heading {
+  margin-top: 48px;
+}
+
+.deferred-media-block {
+  padding-bottom: 38px;
+}
+
+@media (max-width: 680px) {
+  body {
+    font-size: var(--text-body);
+  }
+
+  .identity-block {
+    gap: 18px;
+  }
+
+  .identity-copy p,
+  .social-list {
+    font-size: 0.9375rem;
+  }
+
+  .clutter-toolbar {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .clutter-toolbar .filter-row {
+    margin-top: 0;
+  }
+
+  .clutter-grid {
+    gap: 38px;
+  }
+
+  .story-page {
+    padding-top: 28px;
+  }
+
+  .story-title-wrap h1,
+  .story-lead > p:last-child,
+  .section-body > p {
+    font-size: var(--text-body);
+  }
+
+  .story-stamp {
+    margin-top: 12px;
+  }
+
+  .story-lead {
+    padding-top: 26px;
+    padding-bottom: 32px;
+  }
+
+  .story-section {
+    gap: 18px;
+    padding-top: 24px;
+    padding-bottom: 30px;
+  }
+
+  .gallery-section {
+    padding-top: 42px;
+  }
+}
+
+/* Kylie Chang-inspired case-study layout for every story page. */
+
+.story-shell .site-header {
+  position: static;
+  padding: 16px 24px 14px;
+  backdrop-filter: none;
+}
+
+.story-page {
+  width: 80vw;
+  padding: 20px 0 96px;
+}
+
+.story-heading {
+  margin-bottom: 48px;
+}
+
+.story-heading > h1 {
+  margin: 0 0 6px;
+  font-family: var(--type);
+  font-size: var(--text-title);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+.story-year,
+.story-category {
+  margin: 0;
+}
+
+.story-year {
+  margin-bottom: 14px;
+  color: var(--muted);
+  font-size: var(--text-body);
+}
+
+.story-category {
+  margin-bottom: 14px;
+}
+
+.story-category .tag {
+  padding: 3px 10px 4px;
+  border-radius: 999px;
+}
+
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 8px;
+  margin: 0;
+  color: color-mix(in srgb, var(--muted) 72%, white);
+  font-size: 0.75rem;
+}
+
+.breadcrumbs a {
+  color: inherit;
+}
+
+.story-heading > .story-website-link {
+  display: inline-block;
+  margin-top: 12px;
+}
+
+.story-feature {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  align-items: stretch;
+}
+
+.story-feature .media-frame,
+.story-feature-copy {
+  min-width: 0;
+}
+
+.story-feature .placeholder-art,
+.story-feature .media-frame > img,
+.story-feature .media-frame > video {
+  height: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.story-feature-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.story-feature-copy h2 {
+  margin: 0 0 8px;
+  font-family: var(--type);
+  font-size: var(--text-body);
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+.story-feature-copy p {
+  max-width: 34rem;
+  margin: 0;
+  font-size: var(--text-body);
+  line-height: 1.62;
+}
+
+.story-sections {
+  display: grid;
+  gap: 64px;
+  margin-top: 64px;
+  border-top: 0;
+}
+
+.story-section,
+.story-random-things .story-section {
+  display: block;
+  width: 87.5%;
+  margin: 0 auto;
+  padding: 0;
+  border-bottom: 0;
+}
+
+.section-label h2 {
+  max-width: none;
+  margin: 0 0 24px;
+  font-family: var(--type);
+  font-size: var(--text-title);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+.section-label p {
+  max-width: 34rem;
+  margin: -16px 0 24px;
+}
+
+.section-body,
+.story-about-julia .section-body {
+  max-width: none;
+}
+
+.section-body > p,
+.story-about-julia .section-body > p {
+  max-width: 56rem;
+  margin-bottom: 14px;
+}
+
+.story-page > .drop-showcase,
+.story-page > .bridge-team-photo,
+.story-page > .random-media-strip,
+.story-page > .deferred-media-block,
+.story-page > .portfolio-mosaic-experience {
+  width: 87.5%;
+  margin: 64px auto 0;
+}
+
+.story-page > .bridge-team-photo {
+  border: 0;
+}
+
+.story-page > .deferred-media-block {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.drop-showcase {
+  padding-bottom: 0;
+}
+
+.drop-founder-story {
+  border: 0;
+}
+
+.drop-demo-heading {
+  margin: 64px 0 32px;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.drop-demo-heading .kicker,
+.drop-demo-heading > p {
+  display: none;
+}
+
+.drop-demo-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.drop-demo-screen {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.drop-demo-screen .lightbox-trigger {
+  border-radius: 0;
+}
+
+.drop-demo-meta {
+  padding-top: 10px;
+}
+
+.portfolio-mosaic-experience {
+  padding: 0;
+  border-top: 0;
+}
+
+.portfolio-mosaic-layout {
+  grid-template-columns: minmax(0, 2fr) minmax(18rem, 1fr);
+  gap: 24px;
+}
+
+.company-mosaic {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: minmax(84px, auto);
+  gap: 12px;
+}
+
+.company-tile,
+.company-tile[data-size="feature"],
+.company-tile[data-size="quarter"],
+.company-tile[data-size="third"],
+.company-tile[data-size="half"] {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+.company-tile {
+  padding: 12px;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.company-tile::before,
+.company-tile::after {
+  display: none;
+}
+
+.company-tile:hover,
+.company-tile:focus-visible,
+.company-tile[data-active="true"] {
+  box-shadow: none;
+  filter: none;
+  transform: none;
+}
+
+.company-story-panel {
+  position: static;
+  min-height: 100%;
+  padding: 18px;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.company-story-panel h2 {
+  margin-top: 28px;
+  margin-bottom: 14px;
+}
+
+.gallery-section,
+.reference-links {
+  width: 87.5%;
+  margin: 64px auto 0;
+  padding: 0;
+  border-top: 0;
+}
+
+.gallery-heading {
+  display: block;
+  margin-bottom: 32px;
+}
+
+.gallery-heading h2,
+.reference-links h2 {
+  margin: 0 0 24px;
+  font-size: var(--text-title);
+  font-weight: 700;
+}
+
+.gallery-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.gallery-grid .media-frame:nth-child(3n) {
+  width: 100%;
+  margin-left: 0;
+}
+
+.reference-links {
+  display: block;
+}
+
+.reference-links a {
+  display: block;
+  width: fit-content;
+  padding: 5px 0;
+  border: 0;
+}
+
+.reference-links a span {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .story-shell .site-header {
+    padding-right: var(--pad);
+    padding-left: var(--pad);
+  }
+
+  .story-page {
+    width: calc(100% - (2 * var(--pad)));
+    padding-top: 24px;
+    padding-bottom: 64px;
+  }
+
+  .story-heading {
+    margin-bottom: 40px;
+  }
+
+  .story-feature {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .story-feature-copy {
+    display: block;
+  }
+
+  .story-sections {
+    gap: 48px;
+    margin-top: 48px;
+  }
+
+  .story-section,
+  .story-random-things .story-section,
+  .story-page > .drop-showcase,
+  .story-page > .bridge-team-photo,
+  .story-page > .random-media-strip,
+  .story-page > .deferred-media-block,
+  .story-page > .portfolio-mosaic-experience,
+  .gallery-section,
+  .reference-links {
+    width: 100%;
+  }
+
+  .portfolio-mosaic-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .company-mosaic {
+    grid-template-columns: 1fr;
+  }
+
+  .drop-demo-grid {
+    display: flex;
+    gap: 16px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
 }

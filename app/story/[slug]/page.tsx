@@ -6,7 +6,7 @@ import { LightboxImage } from "../../LightboxImage";
 import { PortfolioMosaic } from "../../PortfolioMosaic";
 import { RandomLinkButton, RandomThingsMedia, RandomYouTubeEmbed } from "../../RandomThingsMedia";
 import { TheDropShowcase } from "../../TheDropShowcase";
-import { FooterNote, MediaFrame, SiteHeader } from "../../components";
+import { MediaFrame, SiteHeader } from "../../components";
 import { getStory, portfolioCompanies, stories } from "../../content";
 
 type StoryPageProps = {
@@ -35,41 +35,40 @@ export default async function StoryPage({ params }: StoryPageProps) {
 
   if (!story) notFound();
 
-  const storyIndex = stories.findIndex((item) => item.slug === story.slug);
-  const nextStory = stories[(storyIndex + 1) % stories.length];
+  const sectionLabel = story.filter === "side-quests"
+    ? "side quests"
+    : story.filter ?? story.tag;
 
   return (
-    <div className="site-shell">
+    <div className="site-shell story-shell">
       <SiteHeader />
 
       <main className={`story-page story-${story.slug} ${story.slug === "investment-portfolio" ? "portfolio-story-page" : ""}`}>
-        <div className="story-heading">
-          <p className="breadcrumbs">
-            <a href="/">← Back to all</a>
-          </p>
-          <div className="story-title-wrap">
-            <h1>{story.title}</h1>
-            <div className="story-stamp">
-              <span>{story.year}</span>
-              {story.slug === "newtone-ai" && (
-                <a className="story-website-link" href="https://www.newtone.ai/" target="_blank" rel="noreferrer">
-                  newtone.ai ↗
-                </a>
-              )}
-            </div>
-          </div>
-        </div>
+        <header className="story-heading">
+          <h1>{story.title}</h1>
+          <p className="story-year">{story.year}</p>
+          <p className="story-category"><span className="tag">{story.tag}</span></p>
+          <nav className="breadcrumbs" aria-label="Breadcrumb">
+            <a href="/">work</a>
+            <span aria-hidden="true">/</span>
+            <span>{sectionLabel}</span>
+            <span aria-hidden="true">/</span>
+            <span>{story.slug.replaceAll("-", " ")}</span>
+          </nav>
+          {story.slug === "newtone-ai" && (
+            <a className="story-website-link" href="https://www.newtone.ai/" target="_blank" rel="noreferrer">
+              newtone.ai ↗
+            </a>
+          )}
+        </header>
 
-        {story.hero.src && (
-          <MediaFrame media={story.hero} />
-        )}
-
-        {story.slug !== "investment-portfolio" && story.slug !== "the-bridge" && (
-          <section className="story-lead">
-            <p className="lead-index">{story.year}</p>
+        <section className="story-feature" aria-label={`${story.title} introduction`}>
+          <MediaFrame media={story.hero.src ? story.hero : story.cover} compact />
+          <div className="story-feature-copy">
+            <h2>{story.title}</h2>
             <p>{story.intro}</p>
-          </section>
-        )}
+          </div>
+        </section>
 
         {story.slug === "the-drop" && <TheDropShowcase />}
 
@@ -189,12 +188,7 @@ export default async function StoryPage({ params }: StoryPageProps) {
         {story.slug !== "collabforlove" && story.slug !== "the-drop" && story.slug !== "the-bridge" && story.slug !== "random-things" && story.gallery?.some((media) => media.src) && (
           <section className="gallery-section">
             <div className="gallery-heading">
-              <p className="kicker">MEDIA ARCHIVE</p>
-              <h2>Images & videos to drop in</h2>
-              <p>
-                Every labeled block is a swap-ready media slot. Add the file path in one content entry;
-                the layout will take care of the rest.
-              </p>
+              <h2>Images &amp; videos</h2>
             </div>
             <div className="gallery-grid">
               {story.gallery.map((media, index) => (
@@ -206,7 +200,7 @@ export default async function StoryPage({ params }: StoryPageProps) {
 
         {story.links && story.links.length > 0 && (
           <section className="reference-links">
-            <h2>Footnotes from the internet</h2>
+            <h2>Links</h2>
             <div>
               {story.links.map((link, index) => (
                 <a href={link.href} target="_blank" rel="noreferrer" key={link.href}>
@@ -217,16 +211,7 @@ export default async function StoryPage({ params }: StoryPageProps) {
             </div>
           </section>
         )}
-
-        <nav className="story-next" aria-label="Next archive story">
-          <span>NEXT</span>
-          <a href={`/story/${nextStory.slug}`}>
-            {nextStory.title} <span aria-hidden="true">→</span>
-          </a>
-        </nav>
       </main>
-
-      <FooterNote />
     </div>
   );
 }
