@@ -1,10 +1,21 @@
 import assert from "node:assert/strict";
-import { access } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
-const { default: worker } = await import("../dist/server/index.js");
+const staticOutput = new URL("../dist/client/", import.meta.url);
+const isStatic = await access(new URL("index.html", staticOutput)).then(() => true, () => false);
+const worker = isStatic ? null : (await import("../dist/server/index.js")).default;
 
 async function render(path = "/") {
+  if (isStatic) {
+    const file = new URL(path === "/" ? "index.html" : `${path.slice(1)}.html`, staticOutput);
+    try {
+      return new Response(await readFile(file, "utf8"), { headers: { "content-type": "text/html" } });
+    } catch (error) {
+      if (error.code === "ENOENT") return new Response("Not found", { status: 404 });
+      throw error;
+    }
+  }
   return worker.fetch(
     new Request(`http://localhost${path}`, { headers: { accept: "text/html" } }),
     { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
@@ -41,6 +52,35 @@ test("every story linked from the archive has a working page", async (t) => {
       assert.doesNotMatch(html, /Internal Server Error/);
     });
   }
+});
+
+test("the header points to the archive anchor and the About page", async () => {
+  const header = homeHtml.match(/<header class="site-header">[\s\S]*?<\/header>/)?.[0];
+  assert.ok(header);
+  assert.match(header, /<a href="\/#work">Explore<\/a>/);
+  assert.match(homeHtml, /<section[^>]*id="work"/);
+  assert.match(header, /<a href="\/story\/about-julia">About<\/a>/);
+  const about = await render("/story/about-julia");
+  assert.equal(about.status, 200);
+  assert.match(await about.text(), /<h1>About me<\/h1>/);
+});
+
+test("the archive puts newer dated entries first and undated investments last", () => {
+  const paths = [...homeHtml.matchAll(/<a\b[^>]*class="archive-card"[^>]*href="\/story\/([^"]+)"/g)].map((match) => match[1]);
+  const before = (first, second) => {
+    assert.ok(paths.includes(first) && paths.includes(second));
+    assert.ok(paths.indexOf(first) < paths.indexOf(second), `${first} comes before ${second}`);
+  };
+  before("meta-consumer-hackathon", "sota-community");
+  before("sota-community", "mistral-ai-game-jam");
+  before("mistral-ai-game-jam", "robotics-hackathon");
+  before("the-bridge", "the-drop");
+  before("the-drop", "newtone-ai");
+  before("newtone-ai", "collabforlove");
+  before("collabforlove", "daytonas-stable");
+  before("daytonas-stable", "lvmh-concept-store");
+  before("lvmh-concept-store", "investment-eigen");
+  before("investment-eigen", "investment-uncovr");
 });
 
 test("the mosaic shows individual investments as title-only squares", () => {

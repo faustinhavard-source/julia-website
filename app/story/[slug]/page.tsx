@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CollabforlovePolaroids } from "../../CollabforlovePolaroids";
 import { CollabforloveStoryCollage } from "../../CollabforloveStoryCollage";
@@ -47,7 +46,7 @@ export default async function StoryPage({ params }: StoryPageProps) {
       <main id="main-content" className={`story-page story-${story.slug} ${story.slug === "investment-portfolio" ? "portfolio-story-page" : ""}`}>
         <header className="story-heading">
           <nav className="breadcrumbs" aria-label="Breadcrumb">
-            <Link href="/#work">All work</Link>
+            <a href="/#work">Explore</a>
             <span aria-hidden="true">/</span>
             <span>{sectionLabel}</span>
           </nav>

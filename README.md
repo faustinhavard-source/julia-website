@@ -15,7 +15,7 @@ Open the local address printed by the development server.
 
 ## Add a box
 
-All content lives in `app/content.ts`. Add an object to `storyLibrary`. The array order is the home-page order. No separate ordering list or route registration is needed.
+All content lives in `app/content.ts`. Add an object to `storyLibrary`. The mosaic sorts dates from newest to oldest, including months when supplied. Undated entries appear last, and entries with the same date retain their array order. No separate ordering list or route registration is needed.
 
 ```ts
 {
@@ -54,6 +54,8 @@ All content lives in `app/content.ts`. Add an object to `storyLibrary`. The arra
 
 `ArchiveCard.tsx` handles every home-page box. `MediaFrame` handles media inside story pages. The home page sends only card information to the interactive grid, keeping full project stories on the server.
 
+Internal navigation uses standard links so the statically hosted pages and the Explore section anchor work without a server-side navigation endpoint. Keep native links for the header, project cards and return links.
+
 ## Add an investment
 
 Add the company to `portfolioCompanies` in `app/content.ts`, including its `name`, `tone` and optional personal `story`. Its individual card, Investments filter entry and `/story/investment-<company>` page are generated automatically. Add `year: "2025"` only when the investment date is confirmed; omit it otherwise. Keep `status: "incoming"` for entries that are not yet completed investments. Status is displayed separately from the date. No dates or investment details are invented when none are available.
@@ -71,6 +73,8 @@ npm run typecheck
 ```
 
 The render tests check the home page, every linked story, missing routes and local media/font assets. Browser interaction and visual QA are separate from these checks.
+
+For the deployed static version, run `npm run build:preview` followed by `node --test tests/rendered-html.test.mjs`. The same tests then verify the exported pages, header destinations and chronological order.
 
 ## Hosting and domain
 

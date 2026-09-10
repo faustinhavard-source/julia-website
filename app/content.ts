@@ -1,3 +1,5 @@
+import { archiveDateOrder } from "./chronology";
+
 export type StoryFilter = "work" | "investments" | "side-quests";
 
 export type MediaItem = {
@@ -30,7 +32,7 @@ export type Story = {
   status?: "incoming";
   tag: string;
   filter?: StoryFilter;
-  /** Keep unfinished entries out of the public site. Array order controls the mosaic. */
+  /** Keep unfinished entries out of the public site. Array order breaks date ties. */
   draft?: boolean;
   summary: string;
   intro: string;
@@ -847,7 +849,9 @@ const investmentStories: Story[] = portfolioCompanies.map((company) => ({
 export const stories = storyLibrary.filter((story) => !story.draft).flatMap((story) =>
   story.slug === "investment-portfolio" ? [story, ...investmentStories] : [story],
 );
-export const archiveStories = stories.filter((story) => story.filter && story.slug !== "investment-portfolio");
+export const archiveStories = stories
+  .filter((story) => story.filter && story.slug !== "investment-portfolio")
+  .sort((a, b) => archiveDateOrder(b.year) - archiveDateOrder(a.year));
 export const bioStory = stories.find((story) => story.slug === "about-julia")!;
 
 export function getStory(slug: string) {

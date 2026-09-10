@@ -23,6 +23,13 @@ const eslintConfig = defineConfig([
   jsxA11y.flatConfigs.recommended,
   next.configs["core-web-vitals"],
   {
+    files: ["app/**/*.{ts,tsx}"],
+    rules: {
+      // Static hosting serves document links without a client-navigation server.
+      "@next/next/no-html-link-for-pages": "off",
+    },
+  },
+  {
     languageOptions: {
       globals: {
         ...globals.browser,
