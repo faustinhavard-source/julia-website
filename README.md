@@ -15,7 +15,7 @@ Open the local address printed by the development server.
 
 ## Add a box
 
-All content lives in `app/content.ts`. Add an object to `storyLibrary`. The mosaic sorts dates from newest to oldest, including months when supplied. Undated entries appear last, and entries with the same date retain their array order. No separate ordering list or route registration is needed.
+All content lives in `app/content.ts`. Add an object to `storyLibrary`. The mosaic puts entries with `status: "incoming"` or `year: "Ongoing"` first, then sorts the rest from newest to oldest, including months when supplied. Other undated entries appear last, and entries with the same priority and date retain their array order. No separate ordering list or route registration is needed.
 
 ```ts
 {

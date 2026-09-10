@@ -1,4 +1,4 @@
-import { archiveDateOrder } from "./chronology";
+import { compareArchiveEntries } from "./chronology";
 
 export type StoryFilter = "work" | "investments" | "side-quests";
 
@@ -851,7 +851,7 @@ export const stories = storyLibrary.filter((story) => !story.draft).flatMap((sto
 );
 export const archiveStories = stories
   .filter((story) => story.filter && story.slug !== "investment-portfolio")
-  .sort((a, b) => archiveDateOrder(b.year) - archiveDateOrder(a.year));
+  .sort(compareArchiveEntries);
 export const bioStory = stories.find((story) => story.slug === "about-julia")!;
 
 export function getStory(slug: string) {

@@ -65,8 +65,11 @@ test("the header points to the archive anchor and the About page", async () => {
   assert.match(await about.text(), /<h1>About me<\/h1>/);
 });
 
-test("the archive puts newer dated entries first and undated investments last", () => {
+test("the archive puts incoming and ongoing entries first, then sorts by date", () => {
   const paths = [...homeHtml.matchAll(/<a\b[^>]*class="archive-card"[^>]*href="\/story\/([^"]+)"/g)].map((match) => match[1]);
+  assert.deepEqual(new Set(paths.slice(0, 4)), new Set([
+    "investment-goldfish", "investment-avior", "investment-marv-labs", "cider-farm",
+  ]));
   const before = (first, second) => {
     assert.ok(paths.includes(first) && paths.includes(second));
     assert.ok(paths.indexOf(first) < paths.indexOf(second), `${first} comes before ${second}`);
