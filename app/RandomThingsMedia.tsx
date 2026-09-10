@@ -61,10 +61,10 @@ const media: Record<RandomMediaGroup, Array<{ src: string; alt: string; caption:
   ],
 };
 
-export function RandomThingsMedia({ group }: { group: RandomMediaGroup }) {
+export function RandomThingsMedia({ group, excludeSrc }: { group: RandomMediaGroup; excludeSrc?: string }) {
   return (
     <div className={`random-media-strip random-media-${group}`} aria-label={`${group} image gallery`}>
-      {media[group].map((item, index) => (
+      {media[group].filter((item) => item.src !== excludeSrc).map((item, index) => (
         <figure className={`random-media-card random-media-card-${index + 1}`} key={item.src}>
           <LightboxImage src={item.src} alt={item.alt} />
           <figcaption>{item.caption}</figcaption>

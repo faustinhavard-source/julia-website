@@ -13,14 +13,6 @@ export function CollabforloveStoryCollage() {
         <figcaption>Madame Figaro, one of 30+ media features</figcaption>
       </figure>
 
-      <figure className="collab-collage-piece collab-collage-standing">
-        <LightboxImage
-          alt="Julia and Eole standing together in Paris"
-          src="/media/collabforlove/julia-eole-standing.webp"
-        />
-        <figcaption>Julia + Eole, the people behind the feed</figcaption>
-      </figure>
-
       <figure className="collab-collage-piece collab-collage-seated">
         <LightboxImage
           alt="Julia and Eole sitting together in a Paris garden"

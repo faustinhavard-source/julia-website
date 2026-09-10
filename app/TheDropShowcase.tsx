@@ -1,4 +1,3 @@
-import { LightboxImage } from "./LightboxImage";
 import { LightboxVideo } from "./LightboxVideo";
 
 const demos = [
@@ -27,16 +26,7 @@ const demos = [
 
 export function TheDropShowcase() {
   return (
-    <section className="drop-showcase" aria-label="The Drop founders and product demos">
-      <div className="drop-founder-story">
-        <div className="drop-founder-photo">
-          <LightboxImage
-            alt="Julia and Anastasia Wolter together on a flight"
-            src="/media/the-drop/julia-anastasia-flight.jpg"
-          />
-        </div>
-      </div>
-
+    <section className="drop-showcase" aria-label="The Drop product demos">
       <div className="drop-demo-heading">
         <div>
           <p className="kicker">THE DROP / PRODUCT ARCHIVE</p>

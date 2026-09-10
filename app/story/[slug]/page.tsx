@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CollabforlovePolaroids } from "../../CollabforlovePolaroids";
 import { CollabforloveStoryCollage } from "../../CollabforloveStoryCollage";
-import { LightboxImage } from "../../LightboxImage";
 import { PortfolioMosaic } from "../../PortfolioMosaic";
 import { RandomLinkButton, RandomThingsMedia, RandomYouTubeEmbed } from "../../RandomThingsMedia";
 import { TheDropShowcase } from "../../TheDropShowcase";
@@ -38,6 +37,11 @@ export default async function StoryPage({ params }: StoryPageProps) {
   const sectionLabel = story.filter === "side-quests"
     ? "side quests"
     : story.filter ?? story.tag;
+  const featureMedia = story.hero.src ? story.hero : story.cover;
+  const galleryMedia = (story.gallery ?? []).filter((media, index, gallery) =>
+    media.src && media.src !== featureMedia.src
+    && gallery.findIndex((item) => item.src === media.src) === index,
+  );
 
   return (
     <div className="site-shell story-shell">
@@ -61,7 +65,7 @@ export default async function StoryPage({ params }: StoryPageProps) {
         </header>
 
         <section className="story-feature" aria-label={`${story.title} introduction`}>
-          <MediaFrame media={story.hero.src ? story.hero : story.cover} compact />
+          <MediaFrame media={featureMedia} compact />
           <div className="story-feature-copy">
             <h2>{story.title}</h2>
             <p>{story.intro}</p>
@@ -70,17 +74,11 @@ export default async function StoryPage({ params }: StoryPageProps) {
 
         {story.slug === "the-drop" && <TheDropShowcase />}
 
-        {story.slug === "the-bridge" && (
-          <section className="bridge-team-photo" aria-label="The Bridge team">
-            <LightboxImage alt="The full Bridge team together by the San Francisco Bay" src="/media/the-bridge/team.webp" />
-          </section>
-        )}
-
-        {story.slug === "meta-consumer-hackathon" && <RandomThingsMedia group="meta" />}
+        {story.slug === "meta-consumer-hackathon" && <RandomThingsMedia group="meta" excludeSrc={featureMedia.src} />}
 
         {story.slug === "mistral-ai-game-jam" && (
           <div className="deferred-media-block">
-            <RandomThingsMedia group="mistral" />
+            <RandomThingsMedia group="mistral" excludeSrc={featureMedia.src} />
             <RandomYouTubeEmbed label="Mistral AI Game Jam" videoId="NhPDVAcLzD4" />
           </div>
         )}
@@ -183,13 +181,13 @@ export default async function StoryPage({ params }: StoryPageProps) {
         </div>
         ) : null}
 
-        {story.slug !== "collabforlove" && story.slug !== "the-drop" && story.slug !== "the-bridge" && story.slug !== "random-things" && story.gallery?.some((media) => media.src) && (
+        {story.slug !== "collabforlove" && story.slug !== "the-drop" && story.slug !== "the-bridge" && story.slug !== "random-things" && galleryMedia.length > 0 && (
           <section className="gallery-section">
             <div className="gallery-heading">
               <h2>Images &amp; videos</h2>
             </div>
             <div className="gallery-grid">
-              {story.gallery.map((media, index) => (
+              {galleryMedia.map((media, index) => (
                 <MediaFrame media={media} loading="lazy" key={`${media.label}-${index}`} />
               ))}
             </div>
